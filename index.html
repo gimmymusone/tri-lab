@@ -376,7 +376,8 @@ img{max-width:100%;display:block}
 /* ---------- FOOTER ---------- */
 footer{background:var(--ink);color:var(--smoke);padding:var(--s80) 0 var(--s40)}
 .foot-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:var(--s40);padding-bottom:var(--s64);border-bottom:1px solid var(--graphite)}
-.foot-logo{font-family:var(--f-display);font-size:56px;color:var(--paper);letter-spacing:-.02em;line-height:.9}
+.foot-logo{font-family:var(--f-display);font-size:56px;color:var(--paper);letter-spacing:-.02em;line-height:.9;display:inline-flex;align-items:center;gap:16px}
+.foot-logo-mark{height:52px;width:auto;display:block}
 .foot-logo .u{color:var(--volt)}
 .foot-col h4{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--smoke);margin-bottom:18px}
 .foot-col a{display:block;color:var(--ash);text-decoration:none;font-size:15px;margin-bottom:12px;transition:color .25s}
@@ -494,7 +495,8 @@ footer{background:#f6f6f6;color:var(--slate);border-top:1px solid #ececec}
 .sm-wrap{position:fixed;inset:0;z-index:120;pointer-events:none;--sm-accent:var(--volt-deep)}
 .sm-header{position:absolute;top:0;left:0;width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(18px,4vw,40px);z-index:22;pointer-events:none}
 .sm-header>*{pointer-events:auto}
-.sm-logo{font-family:var(--f-display);font-size:26px;letter-spacing:-.01em;text-transform:uppercase;color:var(--navy);text-decoration:none;display:inline-flex;align-items:center}
+.sm-logo{font-family:var(--f-display);font-size:26px;letter-spacing:-.01em;text-transform:uppercase;color:var(--navy);text-decoration:none;display:inline-flex;align-items:center;gap:11px}
+.sm-logo-mark{height:27px;width:auto;display:block}
 .sm-logo .g{color:var(--volt-deep)}
 .sm-logo .r{color:var(--signal)}
 .sm-toggle{position:relative;display:inline-flex;align-items:center;gap:11px;background:rgba(255,255,255,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(0,0,0,.09);border-radius:100px;padding:11px 18px;cursor:pointer;color:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;line-height:1;box-shadow:0 8px 26px -14px rgba(0,0,0,.3)}
@@ -610,7 +612,7 @@ body.sm-open{overflow:hidden}
     <div class="sm-prelayer" style="background:#0a9a54"></div>
   </div>
   <header class="sm-header">
-    <a href="#top" class="sm-logo" aria-label="TRI-LAB home">TRI<span class="g">·</span>LAB</a>
+    <a href="#top" class="sm-logo" aria-label="TRI-LAB home"><img src="logo.svg" alt="" class="sm-logo-mark" width="30" height="24">TRI<span class="g">·</span>LAB</a>
     <button class="sm-toggle" id="smToggle" type="button" aria-label="Apri menu" aria-expanded="false" aria-controls="smPanel">
       <span class="sm-toggle-textWrap" aria-hidden="true">
         <span class="sm-toggle-textInner">
@@ -1003,7 +1005,7 @@ body.sm-open{overflow:hidden}
   <div class="container">
     <div class="foot-top">
       <div>
-        <div class="foot-logo">TRI<span class="u">·</span>LAB</div>
+        <div class="foot-logo"><img src="logo.svg" alt="" class="foot-logo-mark" width="56" height="46">TRI<span class="u">·</span>LAB</div>
         <p class="t-body" style="color:var(--ash);max-width:340px;margin-top:18px">Ingegneria gestionale, economia e AI generativa al servizio della crescita delle PMI.</p>
       </div>
       <div class="foot-col">

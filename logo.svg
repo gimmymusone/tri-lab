@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 108" role="img" aria-label="TRI-LAB">
+  <g fill="none" stroke-width="8.5" stroke-linejoin="round">
+    <polygon points="6,99 40,19 74,99" stroke="#19E67C"/>
+    <polygon points="58,99 92,19 126,99" stroke="#FF3B30"/>
+    <polygon points="32,99 66,19 100,99" stroke="#111111"/>
+  </g>
+</svg>
