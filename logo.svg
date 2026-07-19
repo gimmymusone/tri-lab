@@ -1,7 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 108" role="img" aria-label="TRI-LAB">
-  <g fill="none" stroke-width="8.5" stroke-linejoin="round">
-    <polygon points="6,99 40,19 74,99" stroke="#19E67C"/>
-    <polygon points="58,99 92,19 126,99" stroke="#FF3B30"/>
-    <polygon points="32,99 66,19 100,99" stroke="#111111"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="55 75 690 450" role="img" aria-label="3LAB">
+  <!-- Definizioni -->
+  <defs>
+    <!-- Triangolo base equilatero (punta verso l'alto) -->
+    <!-- Base: y=0 da -160 a 160. Punta: (0, -280) -->
+    <polygon id="tri" points="0,-280 -160,0 160,0" fill="none" />
+
+    <!-- T1 (Nero - Sinistra) -->
+    <g id="t1"><use href="#tri" transform="translate(250, 490)" /></g>
+    <!-- T2 (Verde - Centro/Alto) -->
+    <g id="t2"><use href="#tri" transform="translate(400, 390)" /></g>
+    <!-- T3 (Rosso - Destra) -->
+    <g id="t3"><use href="#tri" transform="translate(550, 490)" /></g>
+
+    <!-- Clip per le intersezioni dell'intreccio -->
+    <clipPath id="clip-t1-over-t2">
+      <circle cx="296.4" cy="291.25" r="55" />
+    </clipPath>
+    <clipPath id="clip-t2-over-t3">
+      <circle cx="503.6" cy="291.25" r="55" />
+    </clipPath>
+  </defs>
+
+  <!-- Gruppo principale: Intreccio dei 3 triangoli -->
+  <g stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="10">
+
+    <!-- 1. T1 Nero (Dietro) -->
+    <use href="#t1" stroke="#FFFFFF" stroke-width="60" />
+    <use href="#t1" stroke="#111111" stroke-width="40" />
+
+    <!-- 2. T2 Verde (Sopra il Nero) -->
+    <use href="#t2" stroke="#FFFFFF" stroke-width="60" />
+    <use href="#t2" stroke="#19E67C" stroke-width="40" />
+
+    <!-- 3. T3 Rosso (Sopra il Verde e il Nero) -->
+    <use href="#t3" stroke="#FFFFFF" stroke-width="60" />
+    <use href="#t3" stroke="#FF3B30" stroke-width="40" />
+
+    <!-- INTRECCIO A: Riporta il Nero SOPRA il Verde (incrocio in alto a sinistra) -->
+    <use href="#t1" stroke="#FFFFFF" stroke-width="60" clip-path="url(#clip-t1-over-t2)" />
+    <use href="#t1" stroke="#111111" stroke-width="40" clip-path="url(#clip-t1-over-t2)" />
+
+    <!-- INTRECCIO B: Riporta il Verde SOPRA il Rosso (incrocio in alto a destra) -->
+    <use href="#t2" stroke="#FFFFFF" stroke-width="60" clip-path="url(#clip-t2-over-t3)" />
+    <use href="#t2" stroke="#19E67C" stroke-width="40" clip-path="url(#clip-t2-over-t3)" />
+
   </g>
 </svg>

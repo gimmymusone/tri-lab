@@ -129,7 +129,7 @@ img{max-width:100%;display:block}
     radial-gradient(40% 40% at 78% 78%, rgba(255,59,48,.10), transparent 70%)}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--s64);align-items:center;width:100%}
 .hero-left{position:relative;padding-left:26px;border-left:1px solid var(--graphite)}
-.hero-left::before{content:'AGENCY // 001';position:absolute;top:-26px;left:26px;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;color:var(--smoke)}
+.hero-left::before{content:none}
 .hero-eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--volt);margin-bottom:22px;display:inline-flex;align-items:center;gap:10px}
 .hero-eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--volt);box-shadow:0 0 12px var(--volt)}
 .hero h1{color:var(--paper)}
@@ -493,10 +493,10 @@ footer{background:#f6f6f6;color:var(--slate);border-top:1px solid #ececec}
 
 /* ================= STAGGERED MENU (React Bits · vanilla) ================= */
 .sm-wrap{position:fixed;inset:0;z-index:120;pointer-events:none;--sm-accent:var(--volt-deep)}
-.sm-header{position:absolute;top:0;left:0;width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(18px,4vw,40px);z-index:22;pointer-events:none}
+.sm-header{position:absolute;top:0;left:0;width:100%;display:flex;align-items:center;justify-content:flex-end;padding:20px clamp(18px,4vw,40px);z-index:22;pointer-events:none}
 .sm-header>*{pointer-events:auto}
-.sm-logo{font-family:var(--f-display);font-size:26px;letter-spacing:-.01em;text-transform:uppercase;color:var(--navy);text-decoration:none;display:inline-flex;align-items:center;gap:11px}
-.sm-logo-mark{height:27px;width:auto;display:block}
+.sm-logo{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--f-display);font-size:26px;letter-spacing:-.01em;text-transform:uppercase;color:var(--navy);text-decoration:none;display:inline-flex;align-items:center;gap:11px}
+.sm-logo-mark{height:31px;width:auto;display:block}
 .sm-logo .g{color:var(--volt-deep)}
 .sm-logo .r{color:var(--signal)}
 .sm-toggle{position:relative;display:inline-flex;align-items:center;gap:11px;background:rgba(255,255,255,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(0,0,0,.09);border-radius:100px;padding:11px 18px;cursor:pointer;color:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;line-height:1;box-shadow:0 8px 26px -14px rgba(0,0,0,.3)}
@@ -612,7 +612,7 @@ body.sm-open{overflow:hidden}
     <div class="sm-prelayer" style="background:#0a9a54"></div>
   </div>
   <header class="sm-header">
-    <a href="#top" class="sm-logo" aria-label="TRI-LAB home"><img src="logo.svg" alt="" class="sm-logo-mark" width="30" height="24">TRI<span class="g">·</span>LAB</a>
+    <a href="#top" class="sm-logo" aria-label="3LAB home"><img src="logo.svg" alt="" class="sm-logo-mark" width="34" height="29"></a>
     <button class="sm-toggle" id="smToggle" type="button" aria-label="Apri menu" aria-expanded="false" aria-controls="smPanel">
       <span class="sm-toggle-textWrap" aria-hidden="true">
         <span class="sm-toggle-textInner">
@@ -656,7 +656,6 @@ body.sm-open{overflow:hidden}
   <div class="container hero-inner">
     <div class="hero-grid">
       <div class="hero-left">
-        <span class="hero-eyebrow">Strategia Cavallo di Troia</span>
         <h1 class="t-display-xl">TRI<span class="accent">·</span>LAB</h1>
         <p class="hero-sub">
           Dove la geometria incontra il business. Uniamo <strong style="color:#fff;font-weight:600">ingegneria gestionale</strong>,
@@ -670,7 +669,6 @@ body.sm-open{overflow:hidden}
         <div class="hero-metrics">
           <div class="hero-metric"><div class="n">3<span class="u">·</span>HUB</div><div class="l">Creative · Business · Operation</div></div>
           <div class="hero-metric"><div class="n">A<span class="u">3</span></div><div class="l">Metodo ingegneristico unico</div></div>
-          <div class="hero-metric"><div class="n">AI<span class="u">·</span>1st</div><div class="l">Front creativo · Back automatizzato</div></div>
         </div>
         <p class="hero-quip" data-blurtext>Da PMI, ma trattate come multinazionali. Senza il conto delle multinazionali.</p>
       </div>
@@ -825,10 +823,10 @@ body.sm-open{overflow:hidden}
         <h2 class="t-display reveal" style="color:var(--paper);margin-top:20px">CHAT<br>TO CMS</h2>
         <p class="t-body-lg reveal" style="margin-top:22px;max-width:460px">Aggiorna il tuo sito direttamente da WhatsApp o Telegram. Nessun pannello, nessun tecnico: scrivi un messaggio e il front-end cambia in pochi secondi.</p>
         <ul class="flow-list">
-          <li class="reveal"><span class="dot">1</span><strong>Messaggio</strong> — l'imprenditore scrive su WhatsApp o Telegram.</li>
-          <li class="reveal"><span class="dot">2</span><strong>Webhook → n8n / Make</strong> — il contenuto entra nel flusso di automazione.</li>
-          <li class="reveal"><span class="dot">3</span><strong>AI</strong> — Claude estrae i dati strutturati e chiede conferma di sicurezza.</li>
-          <li class="reveal"><span class="dot">4</span><strong>API del CMS</strong> — Webflow / WordPress / Shopify si aggiornano live.</li>
+          <li class="reveal"><span class="dot">1</span><strong>Messaggio</strong> — tu scrivi la modifica su Telegram.</li>
+          <li class="reveal"><span class="dot">2</span><strong>Webhook</strong> — il messaggio entra nel nostro flusso di automazione.</li>
+          <li class="reveal"><span class="dot">3</span><strong>AI</strong> — estrae i dati e ti chiede conferma.</li>
+          <li class="reveal"><span class="dot">4</span><strong>Il tuo sito</strong> — si aggiorna live, in pochi secondi.</li>
         </ul>
         <div class="kick reveal">Attrito zero · Margine massimo come canone SaaS ricorrente.</div>
       </div>
@@ -1005,7 +1003,7 @@ body.sm-open{overflow:hidden}
   <div class="container">
     <div class="foot-top">
       <div>
-        <div class="foot-logo"><img src="logo.svg" alt="" class="foot-logo-mark" width="56" height="46">TRI<span class="u">·</span>LAB</div>
+        <div class="foot-logo"><img src="logo.svg" alt="" class="foot-logo-mark" width="60" height="51">3-LAB</div>
         <p class="t-body" style="color:var(--ash);max-width:340px;margin-top:18px">Ingegneria gestionale, economia e AI generativa al servizio della crescita delle PMI.</p>
       </div>
       <div class="foot-col">
