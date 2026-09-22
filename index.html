@@ -345,26 +345,45 @@ img{max-width:100%;display:block}
 @keyframes llScroll{to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.ll-track{animation:none;flex-wrap:wrap;justify-content:center}}
 
-/* ---------- CARD SWAP (React Bits · anteprime siti) ---------- */
-.works-sec{background:#f6f6f6}
-.works-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:var(--s64);align-items:center}
-@media(max-width:900px){.works-grid{grid-template-columns:1fr;gap:var(--s40)}}
-.cardswap-stage{position:relative;min-height:440px;perspective:1600px}
-@media(max-width:900px){.cardswap-stage{min-height:360px}}
-.cs-card{position:absolute;top:46%;left:50%;width:min(430px,92%);margin-left:calc(min(430px,92%) / -2);transform-origin:center;border-radius:22px;overflow:hidden;background:#0e0f16;border:1px solid rgba(255,255,255,.08);box-shadow:0 40px 80px -40px rgba(0,0,0,.55);cursor:pointer;will-change:transform}
-.cs-media{position:relative;aspect-ratio:16/10;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;background:radial-gradient(120% 120% at 30% 0%,var(--c1,#222),var(--c2,#0b0b0b));color:#fff;text-align:center;padding:20px;overflow:hidden}
-.cs-media::after{content:'ANTEPRIMA';position:absolute;top:12px;right:12px;font-family:var(--f-mono);font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:4px 9px}
-.cs-media img,.cs-media video,.cs-media iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
-.cs-ph-name{font-family:var(--f-display);font-size:44px;line-height:1;letter-spacing:.01em}
-.cs-ph-tag{font-family:var(--f-mono);font-size:12px;letter-spacing:.04em;color:rgba(255,255,255,.72)}
-.cs-bar{display:flex;align-items:center;gap:9px;padding:13px 18px;font-family:var(--f-mono);font-size:12px;letter-spacing:.03em;color:#e8e8e8;background:#0e0f16}
-.cs-dot{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--volt);box-shadow:0 0 10px var(--volt)}
-.cs-hint{margin-top:22px;font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--smoke)}
-.cs-col{display:flex;flex-direction:column}
-.cs-nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px}
-.cs-navbtn{font-family:var(--f-mono);font-size:12px;letter-spacing:.03em;text-transform:uppercase;padding:10px 18px;border-radius:100px;border:1px solid #d8d8d8;background:#fff;color:var(--ink);cursor:pointer;transition:border-color .25s,background .25s,color .25s,transform .25s}
-.cs-navbtn:hover{border-color:var(--ink);transform:translateY(-2px)}
-.cs-navbtn.active{background:var(--volt);border-color:var(--volt);color:#06140c}
+/* ---------- 3CARD · fidelity nel wallet ---------- */
+.tc-sec{background:#f6f6f6}
+.tc-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--s64);align-items:center}
+@media(max-width:900px){.tc-grid{grid-template-columns:1fr;gap:var(--s40)}}
+.tc-benefits{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:22px 28px}
+@media(max-width:560px){.tc-benefits{grid-template-columns:1fr}}
+.tc-benefits li{border-top:1px solid #dcdcdc;padding-top:14px;display:flex;flex-direction:column;gap:6px}
+.tc-b-k{font-family:var(--f-mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);display:flex;align-items:center;gap:9px}
+.tc-b-k::before{content:'';width:7px;height:7px;border-radius:2px;transform:rotate(45deg);background:var(--volt-deep)}
+.tc-b-t{font-size:14px;line-height:1.5;color:var(--slate)}
+.tc-stage{position:relative;display:flex;flex-direction:column;align-items:center;padding:56px 0 8px;perspective:1400px}
+.tc-pass{width:min(340px,100%);border-radius:18px;background:#2b2d51;color:#fff;font-family:-apple-system,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;box-shadow:0 50px 90px -40px rgba(20,22,50,.65),0 2px 0 rgba(255,255,255,.06) inset;overflow:hidden;transform:rotateX(6deg) rotateY(-10deg);transition:transform .5s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.tc-stage:hover .tc-pass{transform:none}
+.tc-head{display:flex;align-items:center;gap:10px;padding:14px 16px 12px}
+.tc-logo{flex:0 0 36px;height:36px;border-radius:10px;background:#fff;color:#2b2d51;display:grid;place-items:center;font-weight:800;font-size:18px}
+.tc-org{flex:1;font-size:16px;font-weight:600}
+.tc-h-r{text-align:right;display:flex;flex-direction:column}
+.tc-lab{display:block;font-size:9.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+.tc-val{font-size:18px;font-weight:500;line-height:1.1}
+.tc-strip{margin:0 0 4px;padding:18px 16px 16px;background:linear-gradient(135deg,#353868,#23254a)}
+.tc-strip-top{display:flex;justify-content:space-between;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.tc-bar{height:9px;border-radius:9px;background:rgba(255,255,255,.16);margin:10px 0 12px;overflow:hidden}
+.tc-bar i{display:block;height:100%;width:0;border-radius:inherit;background:var(--volt);box-shadow:0 0 12px rgba(25,230,124,.6);transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.tc-stage.in .tc-bar i{width:85%}
+.tc-strip-msg{font-size:14px;color:rgba(255,255,255,.85)}
+.tc-strip-msg b{color:#fff;font-weight:600}
+.tc-fields{display:flex;justify-content:space-between;gap:14px;padding:12px 16px 4px}
+.tc-f{font-size:15px;font-weight:500}
+.tc-qr-wrap{display:flex;flex-direction:column;align-items:center;gap:7px;padding:18px 0 18px}
+.tc-qr{width:118px;height:118px;background:#fff;border-radius:7px;padding:8px}
+.tc-powered{font-size:10px;opacity:.65}
+.tc-notif{position:absolute;top:0;left:50%;width:min(330px,94%);transform:translate(-50%,-10px);opacity:0;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:10px 12px;box-shadow:0 18px 40px -22px rgba(0,0,0,.4);z-index:2;transition:opacity .6s ease .9s,transform .6s cubic-bezier(.2,.8,.2,1) .9s}
+.tc-stage.in .tc-notif{opacity:1;transform:translate(-50%,-26px)}
+.tc-notif-ico{width:30px;height:30px;border-radius:8px;background:#2b2d51;display:grid;place-items:center;font-size:15px}
+.tc-notif-txt{font-size:12.5px;line-height:1.3;color:var(--ink)}
+.tc-notif-txt b{display:block;font-weight:600}
+.tc-notif-t{align-self:start;font-size:11px;color:#888}
+.tc-caption{margin-top:20px;font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--smoke)}
+@media(prefers-reduced-motion:reduce){.tc-pass{transform:none}.tc-bar i,.tc-notif{transition:none}}
 
 /* ---------- CTA ---------- */
 .cta{background:var(--volt);color:var(--ink);border-radius:56px;margin:var(--s64) var(--s24);padding:clamp(48px,8vw,110px) var(--s40);text-align:center;position:relative;overflow:hidden}
@@ -592,6 +611,12 @@ body.sm-open{overflow:hidden}
 .step-back{background:none;border:none;color:var(--slate);cursor:pointer;font-size:14px;font-weight:500}
 .step-next{background:var(--ink);color:#fff;border:none;border-radius:100px;padding:12px 24px;font-weight:600;font-size:14px;cursor:pointer;transition:background .25s}
 .step-next:hover{background:var(--graphite-2)}
+.step-area{width:100%;margin-top:16px;border:1.5px solid #e0e0e0;border-radius:18px;padding:13px 17px;font-size:14.5px;font-family:var(--f-sans);color:var(--ink);line-height:1.5;outline:none;resize:vertical;min-height:84px;transition:border-color .25s}
+.step-area:focus{border-color:var(--volt-deep)}
+.step-area::placeholder{color:#9a9a9a}
+.step-err{margin:14px 0 0;font-size:13px;color:var(--signal)}
+.step-err a{color:inherit}
+.step-next:disabled{opacity:.6;cursor:wait}
 .step-done{text-align:center;padding:6px 0}
 .step-done .big{font-size:52px;line-height:1}
 
@@ -657,7 +682,7 @@ body.sm-open{overflow:hidden}
         <li class="sm-item-wrap"><a class="sm-item" href="#hubs"><span class="sm-item-label">I Tre Hub</span></a></li>
         <li class="sm-item-wrap"><a class="sm-item" href="#method"><span class="sm-item-label">Metodo A3</span></a></li>
         <li class="sm-item-wrap"><a class="sm-item" href="#chatcms"><span class="sm-item-label">Chat-to-CMS</span></a></li>
-        <li class="sm-item-wrap"><a class="sm-item" href="#lavori"><span class="sm-item-label">Lavori</span></a></li>
+        <li class="sm-item-wrap"><a class="sm-item" href="#tricard"><span class="sm-item-label">3Card</span></a></li>
         <li class="sm-item-wrap"><a class="sm-item" href="#about"><span class="sm-item-label">Chi Siamo</span></a></li>
         <li class="sm-item-wrap"><a class="sm-item" href="#contact"><span class="sm-item-label">Contatti</span></a></li>
       </ul>
@@ -712,7 +737,7 @@ body.sm-open{overflow:hidden}
 <!-- ================= MARQUEE ================= -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track" id="marquee">
-    <span class="marquee-item">Ingegneria Gestionale</span>
+    <span class="marquee-item">Ingegneria</span>
     <span class="marquee-item">Controllo di Gestione</span>
     <span class="marquee-item">AI Generativa</span>
     <span class="marquee-item">Lean Management</span>
@@ -880,55 +905,51 @@ body.sm-open{overflow:hidden}
   </div>
 </section>
 
-<!-- ================= LAVORI · CARD SWAP ================= -->
-<section class="works-sec section" id="lavori">
+<!-- ================= 3CARD · FIDELITY NEL WALLET ================= -->
+<section class="tc-sec section" id="tricard">
   <div class="container">
-    <div class="works-grid">
-      <div class="works-copy">
-        <span class="eyebrow reveal">Lavori · siti realizzati</span>
-        <h2 class="t-display reveal" style="margin-top:20px">SITI CHE<br>SI MUOVONO.</h2>
-        <p class="t-body reveal" style="margin-top:22px;max-width:420px">Ogni cliente è un progetto a sé: direzione visiva forte, scroll cinematico e animazioni su misura. Non template — siti che si ricordano.</p>
-        <a href="#contact" class="btn btn-ghost reveal" style="margin-top:32px">Vuoi il tuo <span class="arrow">→</span></a>
-        <div class="cs-hint reveal">Passa il mouse per fermare · clicca una card dietro per portarla avanti</div>
+    <div class="tc-grid">
+      <div class="tc-copy">
+        <span class="eyebrow reveal">Prodotto · 3Card</span>
+        <h2 class="t-display reveal" style="margin-top:20px">IL TUO LOCALE<br>NEL WALLET.</h2>
+        <p class="t-body reveal" style="margin-top:22px;max-width:460px">3Card è la fidelity card digitale per bar, pizzerie e ristoranti. Il cliente la aggiunge ad Apple Wallet o Google Wallet in dieci secondi, senza scaricare app: resta nel telefono accanto alla carta di credito, con il brand del tuo locale.</p>
+        <ul class="tc-benefits">
+          <li class="reveal"><span class="tc-b-k">Clienti che tornano</span><span class="tc-b-t">Punti o timbri a ogni visita e premi automatici. Serve a trasformare i clienti occasionali in abituali.</span></li>
+          <li class="reveal"><span class="tc-b-k">Promo con un tocco</span><span class="tc-b-t">Quando il locale è vuoto, scrivi un'offerta dal pannello: arriva come notifica sulla card, senza pagare pubblicità.</span></li>
+          <li class="reveal"><span class="tc-b-k">Sai chi sono</span><span class="tc-b-t">Iscritti, frequenza, premi riscattati: finalmente conosci i tuoi clienti migliori. Addio cartoncini.</span></li>
+          <li class="reveal"><span class="tc-b-k">Si richiamano da soli</span><span class="tc-b-t">Email automatiche a chi non passa da 60 giorni, bonus di compleanno e invita-un-amico con punti a entrambi.</span></li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost reveal" style="margin-top:32px">Voglio 3Card nel mio locale <span class="arrow">→</span></a>
       </div>
 
-      <!-- Anteprime video dei 3 siti. Per cambiare video: sostituisci il src del <video> (file in Anteprime/).
-           I due <span> restano come fallback se il video non carica. -->
-      <div class="cs-col">
-      <div class="cardswap-stage" id="cardSwap" aria-label="Anteprime dei siti realizzati">
-        <article class="cs-card" data-client="caveau">
-          <div class="cs-media" style="--c1:#4a121b;--c2:#140406">
-            <video src="Anteprime/web/caveau.mp4" autoplay muted loop playsinline preload="metadata"></video>
-            <span class="cs-ph-name">Caveau</span>
-            <span class="cs-ph-tag">E-commerce vini &amp; spirits di lusso</span>
+      <!-- Card di esempio: riproduce il pass Apple Wallet di 3Card (locale fittizio). -->
+      <div class="tc-stage reveal" aria-label="Esempio di card 3Card">
+        <div class="tc-notif" aria-hidden="true">
+          <span class="tc-notif-ico">☕</span>
+          <span class="tc-notif-txt"><b>Bar Aurora</b>Oggi 15–18: cappuccino + cornetto a 2€</span>
+          <span class="tc-notif-t">ora</span>
+        </div>
+        <div class="tc-pass" id="tcPass">
+          <div class="tc-head">
+            <span class="tc-logo">A</span>
+            <span class="tc-org">Bar Aurora</span>
+            <span class="tc-h-r"><span class="tc-lab">Punti</span><span class="tc-val">340</span></span>
           </div>
-          <div class="cs-bar"><span class="cs-dot"></span>caveau · anteprima</div>
-        </article>
-
-        <article class="cs-card" data-client="geol-musone">
-          <div class="cs-media" style="--c1:#123a2c;--c2:#08140f">
-            <video src="Anteprime/web/geol-musone.mp4" autoplay muted loop playsinline preload="metadata"></video>
-            <span class="cs-ph-name">Geol Musone</span>
-            <span class="cs-ph-tag">Studio di geologia</span>
+          <div class="tc-strip">
+            <div class="tc-strip-top"><span>Prossimo premio</span><span>340 / 400</span></div>
+            <div class="tc-bar"><i></i></div>
+            <div class="tc-strip-msg">Mancano 60 punti a <b>Colazione per due</b></div>
           </div>
-          <div class="cs-bar"><span class="cs-dot"></span>geol musone · anteprima</div>
-        </article>
-
-        <article class="cs-card" data-client="valentino">
-          <div class="cs-media" style="--c1:#132a4a;--c2:#060d18">
-            <video src="Anteprime/web/valentino.mp4" autoplay muted loop playsinline preload="metadata"></video>
-            <span class="cs-ph-name">Valentino Immobiliare</span>
-            <span class="cs-ph-tag">Agenzia immobiliare</span>
+          <div class="tc-fields">
+            <div><span class="tc-lab">Saldo spendibile</span><span class="tc-f">120 pt</span></div>
+            <div style="text-align:right"><span class="tc-lab">Premi pronti</span><span class="tc-f">1 caffè omaggio</span></div>
           </div>
-          <div class="cs-bar"><span class="cs-dot"></span>valentino immobiliare · anteprima</div>
-        </article>
-      </div>
-
-      <div class="cs-nav" id="csNav" aria-label="Scegli il sito da vedere">
-        <button class="cs-navbtn" type="button" data-client="caveau">Caveau</button>
-        <button class="cs-navbtn" type="button" data-client="geol-musone">Geol Musone</button>
-        <button class="cs-navbtn" type="button" data-client="valentino">Valentino</button>
-      </div>
+          <div class="tc-qr-wrap">
+            <svg class="tc-qr" id="tcQr" viewBox="0 0 25 25" shape-rendering="crispEdges" aria-hidden="true"></svg>
+            <span class="tc-powered">Powered by 3lab</span>
+          </div>
+        </div>
+        <p class="tc-caption">Esempio · locale fittizio</p>
       </div>
     </div>
   </div>
@@ -943,7 +964,7 @@ body.sm-open{overflow:hidden}
         <h2 class="t-display reveal" style="margin-top:20px">TRE MENTI,<br>UN SISTEMA.</h2>
       </div>
       <p class="about-lead reveal">
-        Un ingegnere gestionale e due economisti che hanno unito le forze per dare alle PMI ciò che di solito
+        Un ingegnere e due economisti che hanno unito le forze per dare alle PMI ciò che di solito
         resta appannaggio delle grandi corporate: <em>strategia finanziaria</em>, <em>esecuzione ingegneristica</em>
         e <span class="red">AI su misura</span> — sotto un unico metodo di lavoro.
       </p>
@@ -955,7 +976,7 @@ body.sm-open{overflow:hidden}
         <div class="tcard-body">
           <div class="tcard-role">Business Hub · Regia</div>
           <h3>Andrea</h3>
-          <p>Economista. Business planning, modellazione finanziaria e roadmap: fa scalare i margini, non le chiacchiere.</p>
+          <p>Economista. Business planning, modellazione finanziaria e roadmap.</p>
           <a class="tcard-btn" href="#contact">Contattami →</a>
         </div>
       </article>
@@ -965,7 +986,7 @@ body.sm-open{overflow:hidden}
         <div class="tcard-body">
           <div class="tcard-role">Operation Hub · Execution</div>
           <h3>Vincenzo</h3>
-          <p>Ingegnere gestionale. Processi in ottica Lean, automazioni e il Full Organization Stack. La base su cui tutto regge.</p>
+          <p>Ingegnere gestionale. Processi in ottica Lean, automazioni e il Full Organization Stack.</p>
           <a class="tcard-btn" href="#contact" style="color:#141527">Contattami →</a>
         </div>
       </article>
@@ -975,7 +996,7 @@ body.sm-open{overflow:hidden}
         <div class="tcard-body">
           <div class="tcard-role">Business Hub · Regia</div>
           <h3>Domenico</h3>
-          <p>Economista. Controllo di gestione, analisi dei margini e ROI di ogni innovazione. Quello che ti sorprende coi numeri.</p>
+          <p>Economista. Controllo di gestione, analisi dei margini e ROI di ogni innovazione.</p>
           <a class="tcard-btn" href="#contact">Contattami →</a>
         </div>
       </article>
@@ -1007,7 +1028,8 @@ body.sm-open{overflow:hidden}
       <div class="step-panel on" data-step="1">
         <h3>Provala. La demo è gratis 😎</h3>
         <p>Lascia la tua email: ti ricontattiamo entro 24h con una mini-analisi del tuo caso.</p>
-        <input class="step-input" type="email" id="demoEmail" placeholder="latua@email.it" aria-label="La tua email">
+        <input class="step-input" type="email" id="demoEmail" placeholder="latua@email.it" aria-label="La tua email" autocomplete="email">
+        <input type="text" id="demoSito" name="sito" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="step-nav" style="justify-content:flex-end"><button class="step-next" type="button" data-next>Continua →</button></div>
       </div>
       <div class="step-panel" data-step="2">
@@ -1017,12 +1039,15 @@ body.sm-open{overflow:hidden}
           <button class="step-chip" type="button" data-chip>Sito che spacca</button>
           <button class="step-chip" type="button" data-chip>Automazioni</button>
           <button class="step-chip" type="button" data-chip>Numeri &amp; margini</button>
-          <button class="step-chip" type="button" data-chip>Stupiscimi ✨</button>
+          <button class="step-chip" type="button" data-chip>Fidelity card</button>
+          <button class="step-chip" type="button" data-chip>Altro</button>
         </div>
+        <textarea class="step-area" id="demoMsg" rows="3" maxlength="1000" placeholder="Vuoi dirci qualcosa in più? Settore, cosa ti serve, cosa oggi ti rallenta… (facoltativo)" aria-label="Il tuo messaggio"></textarea>
+        <p class="step-err" id="demoErr" role="alert" hidden></p>
         <div class="step-nav"><button class="step-back" type="button" data-back>← Indietro</button><button class="step-next" type="button" data-next>Invia →</button></div>
       </div>
       <div class="step-panel" data-step="3">
-        <div class="step-done"><div class="big">🚀</div><h3>Fatto!</h3><p>Ti ricontattiamo entro 24h. Nel frattempo non toccare niente — o tocca tutto, decidi tu.</p></div>
+        <div class="step-done"><div class="big">🚀</div><h3>Fatto!</h3><p>Ti abbiamo appena scritto da info@3-lab.it (se non la vedi, controlla lo spam). Ti ricontattiamo entro 24h.</p></div>
       </div>
     </div>
   </div>
@@ -1034,7 +1059,7 @@ body.sm-open{overflow:hidden}
     <div class="foot-top">
       <div>
         <div class="foot-logo"><img src="logo.svg" alt="" class="foot-logo-mark" width="60" height="51">3-LAB</div>
-        <p class="t-body" style="color:var(--ash);max-width:340px;margin-top:18px">Ingegneria gestionale, economia e AI generativa al servizio della crescita delle PMI.</p>
+        <p class="t-body" style="color:var(--ash);max-width:340px;margin-top:18px">Ingegneria, economia e AI generativa al servizio della crescita delle PMI.</p>
       </div>
       <div class="foot-col">
         <h4>Hub</h4>
@@ -1047,7 +1072,7 @@ body.sm-open{overflow:hidden}
         <a href="#about">Chi Siamo</a>
         <a href="#method">Metodo A3</a>
         <a href="#contact">Prenota Demo</a>
-        <a href="mailto:musonegimmy55@gmail.com">Contatti</a>
+        <a href="mailto:info@3-lab.it">Contatti</a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -1156,60 +1181,24 @@ mm.add({
   return ()=>{ /* cleanup handled by matchMedia */ };
 });
 
-/* ---- CardSwap: stack di anteprime che ruota ---- */
+/* ---- 3Card: QR decorativo + animazione all'ingresso ---- */
 (function(){
-  const stage=document.getElementById('cardSwap');
-  if(!stage||typeof gsap==='undefined')return;
-  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let order=Array.from(stage.querySelectorAll('.cs-card'));
-  if(order.length<2)return;
-  const slot=(i)=>({x:i*26,y:i*22,z:-i*80,rotateZ:i*-2,scale:1-i*0.05,zIndex:100-i});
-  const place=(animate)=>order.forEach((c,i)=>{
-    animate?gsap.to(c,{...slot(i),duration:.7,ease:'power3.inOut'}):gsap.set(c,{...slot(i),opacity:1});
-  });
-  const nav=document.getElementById('csNav');
-  const syncNav=()=>{                        // evidenzia il pulsante del sito davanti
-    if(!nav)return;
-    const c=order[0].getAttribute('data-client');
-    nav.querySelectorAll('.cs-navbtn').forEach(b=>b.classList.toggle('active', b.dataset.client===c));
-  };
-  const playFront=()=>{                      // la card davanti riparte da 0 + sync selettore
-    syncNav();
-    const v=order[0] && order[0].querySelector('video');
-    if(!v)return;
-    try{ v.currentTime=0; }catch(e){}
-    v.play().catch(()=>{});
-  };
-
-  let timer;
-  const advance=()=>{
-    const front=order[0];
-    gsap.to(front,{y:'+=90',x:'-=30',rotateZ:8,opacity:0,duration:.42,ease:'power2.in',onComplete:()=>{
-      order.push(order.shift());
-      const i=order.indexOf(front);
-      gsap.set(front,{...slot(i),opacity:0});
-      place(true);
-      gsap.to(front,{opacity:1,duration:.4});
-      playFront();                           // nuova card davanti → video da 0
-    }});
-  };
-  const start=()=>{ if(reduce)return; stop(); timer=setInterval(advance,14000); };   // 14s per card
-  function stop(){ if(timer)clearInterval(timer); }
-
-  const bringToFront=(card)=>{               // porta un sito in primo piano (click card o selettore)
-    if(!card||order[0]===card)return;
-    order=order.filter(x=>x!==card); order.unshift(card); place(true); start(); playFront();
-  };
-
-  place(false);
-  playFront();
-  start();
-  stage.addEventListener('mouseenter',stop);
-  stage.addEventListener('mouseleave',start);
-  order.forEach(c=>c.addEventListener('click',()=>bringToFront(c)));
-  if(nav) nav.querySelectorAll('.cs-navbtn').forEach(b=>{
-    b.addEventListener('click',()=>bringToFront(order.find(c=>c.getAttribute('data-client')===b.dataset.client)));
-  });
+  const qr=document.getElementById('tcQr');
+  if(qr){
+    const N=25, on=[];
+    const finder=(x,y)=>{ for(let i=0;i<7;i++)for(let j=0;j<7;j++){ const e=i===0||i===6||j===0||j===6, c=i>1&&i<5&&j>1&&j<5; if(e||c) on.push([x+i,y+j]); } };
+    finder(0,0); finder(N-7,0); finder(0,N-7);
+    let seed=7;
+    const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+    const inFinder=(x,y)=>(x<8&&y<8)||(x>N-9&&y<8)||(x<8&&y>N-9);
+    for(let x=0;x<N;x++)for(let y=0;y<N;y++) if(!inFinder(x,y)&&rnd()>.52) on.push([x,y]);
+    qr.innerHTML=on.map(([x,y])=>'<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="#111"/>').join('');
+  }
+  const stage=document.querySelector('.tc-stage');
+  if(!stage) return;
+  if(!('IntersectionObserver' in window)){ stage.classList.add('in'); return; }
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ stage.classList.add('in'); io.disconnect(); } }),{threshold:.35});
+  io.observe(stage);
 })();
 
 /* keep pinned layout correct after images/fonts settle */
@@ -1412,9 +1401,25 @@ window.addEventListener('load',()=>ScrollTrigger.refresh());
       conns.forEach(c=>c.classList.toggle('done', +c.dataset.conn < n));
       cur=n;
     }
+    const em=document.getElementById('demoEmail');
+    const err=document.getElementById('demoErr');
+    const LEAD_URL='https://form.3-lab.it/lead';   // Worker in worker-contatti/
+    async function invia(btn){
+      const sel=s.querySelector('[data-chip].sel');
+      btn.disabled=true; const label=btn.textContent; btn.textContent='Invio…'; err.hidden=true;
+      try{
+        const r=await fetch(LEAD_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({email:em.value.trim(),interesse:sel?sel.textContent.trim():null,messaggio:document.getElementById('demoMsg').value.trim(),pagina:location.href,sito:document.getElementById('demoSito').value})});
+        if(!r.ok) throw new Error(r.status);
+        show(3);
+      }catch(e){
+        err.innerHTML='Invio non riuscito. Riprova, oppure scrivici a <a href="mailto:info@3-lab.it">info@3-lab.it</a>.';
+        err.hidden=false;
+      }finally{ btn.disabled=false; btn.textContent=label; }
+    }
     s.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>{
-      if(cur===1){ const em=document.getElementById('demoEmail'); if(!em.value||!/.+@.+\..+/.test(em.value)){ em.style.borderColor='var(--signal)'; em.focus(); return; } }
-      if(cur<3) show(cur+1);
+      if(cur===1){ if(!em.value||!/.+@.+\..+/.test(em.value)){ em.style.borderColor='var(--signal)'; em.focus(); return; } em.style.borderColor=''; show(2); return; }
+      if(cur===2) invia(b);
     }));
     s.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',()=>{ if(cur>1) show(cur-1); }));
     s.querySelectorAll('[data-chip]').forEach(c=>c.addEventListener('click',()=>{ s.querySelectorAll('[data-chip]').forEach(x=>x.classList.remove('sel')); c.classList.add('sel'); }));
