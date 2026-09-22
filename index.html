@@ -605,6 +605,7 @@ body.sm-open{overflow:hidden}
 .hero-head{display:flex;flex-direction:column;align-items:flex-end;text-align:right}
 .hero-title{font-size:clamp(96px,17vw,248px);line-height:.82}
 .hero-head .hero-sub{max-width:560px;margin-top:32px;font-size:19px;line-height:1.5;text-align:left}
+@media(min-width:901px){.hero-head{width:fit-content;align-items:stretch}.hero-head .hero-sub{width:0;min-width:100%;max-width:none}}
 .hero-bottom{grid-row:3;display:grid;grid-template-columns:1fr auto;align-items:end;gap:28px var(--s40);padding-top:28px;border-top:1px solid rgba(0,0,0,.08)}
 .hero-bottom .hero-quip{grid-column:1/-1;margin:0;max-width:none;white-space:nowrap;font-size:min(24.3px,calc((100vw - 56px)/49.3))}
 .hero-cta .hero-actions{margin-top:0}
