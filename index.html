@@ -1034,7 +1034,7 @@ body.sm-open{overflow:hidden}
       </div>
       <div class="step-panel" data-step="2">
         <h3>Da dove partiamo?</h3>
-        <p>Scegli il punto d'ingresso (poi decidiamo insieme, tranquillo).</p>
+        <p>Scegli il punto d'ingresso, o scrivici direttamente: puoi anche inviare senza selezionare nulla.</p>
         <div class="step-chips">
           <button class="step-chip" type="button" data-chip>Sito che spacca</button>
           <button class="step-chip" type="button" data-chip>Automazioni</button>
@@ -1422,6 +1422,9 @@ window.addEventListener('load',()=>ScrollTrigger.refresh());
       if(cur===2) invia(b);
     }));
     s.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',()=>{ if(cur>1) show(cur-1); }));
+    // Invio da tastiera: Enter sull'email prosegue, Enter nel messaggio (senza shift) manda.
+    em.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); s.querySelector('[data-step="1"] [data-next]').click(); } });
+    document.getElementById('demoMsg').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); s.querySelector('[data-step="2"] [data-next]').click(); } });
     s.querySelectorAll('[data-chip]').forEach(c=>c.addEventListener('click',()=>{ s.querySelectorAll('[data-chip]').forEach(x=>x.classList.remove('sel')); c.classList.add('sel'); }));
   }
 
