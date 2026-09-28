@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>3-LAB — Biglietto da visita</title>
+<meta name="description" content="3-LAB: ingegneria, economia e AI generativa per le PMI. Salva il contatto.">
+<meta name="theme-color" content="#e6e6e6">
+<link rel="icon" href="../logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#000;--paper:#fff;--canvas:#e6e6e6;--slate:#444;--smoke:#8f8f8f;--ash:#c6c6c6;--volt:#19E67C;--volt-deep:#0aa859;--signal:#FF3B30;--navy:#2b2d51}
+*{box-sizing:border-box;margin:0}
+body{min-height:100svh;display:grid;place-items:center;padding:24px 16px;background:var(--canvas);color:var(--ink);font:16px/1.5 'Inter',system-ui,sans-serif}
+.card{width:100%;max-width:400px;background:var(--paper);border-radius:28px;padding:36px 28px 28px;box-shadow:0 30px 60px -30px rgba(0,0,0,.35)}
+.mark{width:88px;height:auto;display:block}
+h1{font:400 64px/.9 'Anton',sans-serif;letter-spacing:-.02em;text-transform:uppercase;margin-top:18px;color:var(--navy)}
+h1 .g{color:var(--volt-deep)}
+.tag{font:500 12px/1.4 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin-top:14px}
+.lead{color:var(--slate);margin-top:14px}
+.hubs{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.hubs span{font:500 12px 'JetBrains Mono',monospace;padding:6px 10px;border-radius:999px;background:var(--canvas)}
+.hubs i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.actions{display:grid;gap:10px;margin-top:28px}
+.btn{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-radius:16px;text-decoration:none;font-weight:600;color:var(--ink);background:var(--canvas)}
+.btn small{font:400 13px 'Inter',sans-serif;color:var(--slate)}
+.btn.main{background:var(--ink);color:var(--paper)}
+.btn.main::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--volt)}
+.btn:focus-visible{outline:3px solid var(--volt-deep);outline-offset:2px}
+footer{font:400 11px 'JetBrains Mono',monospace;color:var(--smoke);text-align:center;margin-top:24px;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<main class="card">
+  <img class="mark" src="../logo.svg" alt="Logo 3-LAB" width="88" height="66">
+  <h1>3-<span class="g">LAB</span></h1>
+  <p class="tag">Ingegneria · Economia · AI Generativa</p>
+  <p class="lead">Il partner d'innovazione per le PMI: rigore economico, ottimizzazione ingegneristica e intelligenza artificiale.</p>
+  <div class="hubs">
+    <span><i style="background:var(--paper);box-shadow:inset 0 0 0 1px var(--ash)"></i>Business</span>
+    <span><i style="background:var(--signal)"></i>Operation</span>
+    <span><i style="background:var(--volt)"></i>Creative</span>
+  </div>
+  <nav class="actions">
+    <a class="btn main" href="3-lab.vcf" download="3-LAB.vcf">Salva contatto</a>
+    <a class="btn" href="mailto:info@3-lab.it">Scrivici <small>info@3-lab.it</small></a>
+    <a class="btn" href="https://3-lab.it/#contact">Prenota una demo <small>→</small></a>
+    <a class="btn" href="https://3-lab.it">Visita il sito <small>3-lab.it</small></a>
+  </nav>
+  <footer>TRI LAB © 2026</footer>
+</main>
+</body>
+</html>
