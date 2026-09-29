@@ -134,6 +134,7 @@ img{max-width:100%;display:block}
 .hero-eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--volt);box-shadow:0 0 12px var(--volt)}
 .hero h1{color:var(--paper)}
 .hero h1 .accent{color:var(--volt)}
+.hero h1 .dash{display:inline-block;width:.34em;height:.15em;background:var(--volt);vertical-align:.3em;margin:0 .03em 0 -.01em}
 .hero-sub{font-family:var(--f-mono);font-size:14px;line-height:1.55;color:var(--ash);max-width:420px;margin-top:26px;text-transform:none;letter-spacing:0}
 .hero-actions{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
 .hero-metrics{margin-top:46px;display:flex;gap:34px;flex-wrap:wrap}
@@ -709,7 +710,7 @@ body.sm-open{overflow:hidden}
   <div class="container hero-inner">
     <div class="hero-top hero-left">
       <div class="hero-head">
-        <h1 class="t-display-xl hero-title">3<span class="accent">·</span>LAB</h1>
+        <h1 class="t-display-xl hero-title">3<span class="accent dash" aria-hidden="true"></span>LAB</h1>
         <p class="hero-sub">
           Dove la geometria incontra il business. Uniamo <strong style="color:#fff;font-weight:600">ingegneria</strong>,
           <strong style="color:#fff;font-weight:600">rigore economico</strong> e <strong style="color:var(--volt);font-weight:600">AI generativa</strong>
@@ -919,7 +920,7 @@ body.sm-open{overflow:hidden}
           <li class="reveal"><span class="tc-b-k">Sai chi sono</span><span class="tc-b-t">Conosci i tuoi clienti migliori. Addio cartoncini.</span></li>
           <li class="reveal"><span class="tc-b-k">Si richiamano da soli</span><span class="tc-b-t">Email a chi non passa da tempo, bonus di compleanno, invita-un-amico.</span></li>
         </ul>
-        <a href="#contact" class="btn btn-ghost reveal" style="margin-top:32px">Voglio 3Card nel mio locale <span class="arrow">→</span></a>
+        <a href="https://3card.3-lab.it/" class="btn btn-ghost reveal" style="margin-top:32px">Voglio 3Card nel mio locale <span class="arrow">→</span></a>
       </div>
 
       <!-- Card di esempio: riproduce il pass Apple Wallet di 3Card (Bar Aurora). -->
@@ -1058,7 +1059,7 @@ body.sm-open{overflow:hidden}
   <div class="container">
     <div class="foot-top">
       <div>
-        <div class="foot-logo"><img src="logo.svg" alt="" class="foot-logo-mark" width="60" height="51">3-LAB</div>
+        <div class="foot-logo"><img src="logo.svg" alt="" class="foot-logo-mark" width="60" height="51"><span>3<span class="u">-</span>LAB</span></div>
         <p class="t-body" style="color:var(--ash);max-width:340px;margin-top:18px">Ingegneria, economia e AI generativa al servizio della crescita delle PMI.</p>
       </div>
       <div class="foot-col">
