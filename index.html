@@ -619,6 +619,10 @@ body.sm-open{overflow:hidden}
 .step-err a{color:inherit}
 .step-next:disabled{opacity:.6;cursor:wait}
 .step-done{text-align:center;padding:6px 0}
+.step-canale{display:flex;gap:10px;margin-bottom:14px}
+.cta-wa{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:12px 22px;border-radius:100px;background:var(--ink);color:#fff;font-weight:600;font-size:14px;text-decoration:none;transition:filter .2s}
+.cta-wa:hover{background:var(--graphite-2)}
+.cta-wa svg{color:#25D366}
 .step-done .big{font-size:52px;line-height:1}
 
 /* ================= BLUR TEXT (Tappa 5 · tono ironico) ================= */
@@ -1017,7 +1021,7 @@ body.sm-open{overflow:hidden}
   <div>
     <span class="eyebrow red" style="margin-bottom:20px">Costruiamo il tuo sistema</span>
     <h2 class="t-display">PRONTO A<br>SCALARE?</h2>
-    <p class="sub">Un solo metodo, tre Hub, zero attrito. Prova la demo: lascia la mail e ti ricontattiamo — niente call fredde, promesso.</p>
+    <p class="sub">Un solo metodo, tre Hub, zero attrito. Prova la demo: lascia la mail o il WhatsApp e ti ricontattiamo — niente call fredde, promesso.</p>
     <div class="stepper" id="demoStepper">
       <div class="step-dots">
         <div class="step-dot active" data-dot="1">1</div>
@@ -1028,7 +1032,11 @@ body.sm-open{overflow:hidden}
       </div>
       <div class="step-panel on" data-step="1">
         <h3>Provala. La demo è gratis 😎</h3>
-        <p>Lascia la tua email: ti ricontattiamo entro 24h con una mini-analisi del tuo caso.</p>
+        <p>Dicci dove preferisci essere ricontattato: ti rispondiamo entro 24h con una mini-analisi del tuo caso.</p>
+        <div class="step-canale" role="radiogroup" aria-label="Come preferisci essere ricontattato">
+          <button class="step-chip sel" type="button" role="radio" aria-checked="true" data-canale="email">Email</button>
+          <button class="step-chip" type="button" role="radio" aria-checked="false" data-canale="whatsapp">WhatsApp</button>
+        </div>
         <input class="step-input" type="email" id="demoEmail" placeholder="latua@email.it" aria-label="La tua email" autocomplete="email">
         <input type="text" id="demoSito" name="sito" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="step-nav" style="justify-content:flex-end"><button class="step-next" type="button" data-next>Continua →</button></div>
@@ -1048,9 +1056,10 @@ body.sm-open{overflow:hidden}
         <div class="step-nav"><button class="step-back" type="button" data-back>← Indietro</button><button class="step-next" type="button" data-next>Invia →</button></div>
       </div>
       <div class="step-panel" data-step="3">
-        <div class="step-done"><div class="big">🚀</div><h3>Fatto!</h3><p>Ti abbiamo appena scritto da info@3-lab.it (se non la vedi, controlla lo spam). Ti ricontattiamo entro 24h.</p></div>
+        <div class="step-done"><div class="big">🚀</div><h3>Fatto!</h3><p id="demoDone">Ti abbiamo appena scritto da info@3-lab.it (se non la vedi, controlla lo spam). Ti ricontattiamo entro 24h.</p></div>
       </div>
     </div>
+    <a class="cta-wa" href="https://wa.me/393791801764?text=Ciao%203-LAB%2C%20vorrei%20saperne%20di%20pi%C3%B9" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>Preferisci scriverci subito? WhatsApp</a>
   </div>
 </section>
 
@@ -1403,6 +1412,18 @@ window.addEventListener('load',()=>ScrollTrigger.refresh());
       cur=n;
     }
     const em=document.getElementById('demoEmail');
+    let canale='email';
+    const TEL_RE=/^\+?[0-9]{8,15}$/;
+    const valore=()=>canale==='email'?em.value.trim():em.value.replace(/[\s.\-()]/g,'');
+    const valido=()=>canale==='email'?/.+@.+\..+/.test(valore()):TEL_RE.test(valore());
+    s.querySelectorAll('[data-canale]').forEach(c=>c.addEventListener('click',()=>{
+      canale=c.dataset.canale;
+      s.querySelectorAll('[data-canale]').forEach(x=>{ const on=x===c; x.classList.toggle('sel',on); x.setAttribute('aria-checked',on); });
+      const wa=canale==='whatsapp';
+      em.type=wa?'tel':'email'; em.placeholder=wa?'+39 333 123 4567':'latua@email.it';
+      em.setAttribute('aria-label',wa?'Il tuo numero WhatsApp':'La tua email'); em.autocomplete=wa?'tel':'email';
+      em.value=''; em.style.borderColor=''; em.focus();
+    }));
     const err=document.getElementById('demoErr');
     const LEAD_URL='https://form.3-lab.it/lead';   // Worker in worker-contatti/
     async function invia(btn){
@@ -1410,8 +1431,9 @@ window.addEventListener('load',()=>ScrollTrigger.refresh());
       btn.disabled=true; const label=btn.textContent; btn.textContent='Invio…'; err.hidden=true;
       try{
         const r=await fetch(LEAD_URL,{method:'POST',headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({email:em.value.trim(),interesse:sel?sel.textContent.trim():null,messaggio:document.getElementById('demoMsg').value.trim(),pagina:location.href,sito:document.getElementById('demoSito').value})});
+          body:JSON.stringify({canale,[canale==='email'?'email':'telefono']:valore(),interesse:sel?sel.textContent.trim():null,messaggio:document.getElementById('demoMsg').value.trim(),pagina:location.href,sito:document.getElementById('demoSito').value})});
         if(!r.ok) throw new Error(r.status);
+        if(canale==='whatsapp') document.getElementById('demoDone').textContent='Ricevuto! Ti scriviamo su WhatsApp entro 24h.';
         show(3);
       }catch(e){
         err.innerHTML='Invio non riuscito. Riprova, oppure scrivici a <a href="mailto:info@3-lab.it">info@3-lab.it</a>.';
@@ -1419,7 +1441,7 @@ window.addEventListener('load',()=>ScrollTrigger.refresh());
       }finally{ btn.disabled=false; btn.textContent=label; }
     }
     s.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>{
-      if(cur===1){ if(!em.value||!/.+@.+\..+/.test(em.value)){ em.style.borderColor='var(--signal)'; em.focus(); return; } em.style.borderColor=''; show(2); return; }
+      if(cur===1){ if(!valido()){ em.style.borderColor='var(--signal)'; em.focus(); return; } em.style.borderColor=''; show(2); return; }
       if(cur===2) invia(b);
     }));
     s.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',()=>{ if(cur>1) show(cur-1); }));
