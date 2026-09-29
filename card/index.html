@@ -27,10 +27,12 @@ h1 .dash{margin-left:.07em}
 .actions{display:grid;gap:10px;margin-top:28px}
 .btn{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-radius:16px;text-decoration:none;font-weight:600;color:var(--ink);background:var(--canvas)}
 .btn small{font:400 13px 'Inter',sans-serif;color:var(--slate)}
-.btn.main{background:var(--ink);color:var(--paper)}
+.btn.main{background:var(--ink);color:var(--paper);padding:24px 22px;font-size:19px;border-radius:20px}
 .btn.main::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--volt)}
 .btn:focus-visible{outline:3px solid var(--volt-deep);outline-offset:2px}
-footer{font:400 11px 'JetBrains Mono',monospace;color:var(--smoke);text-align:center;margin-top:24px;letter-spacing:.04em}
+.site{display:block;text-align:center;margin-top:20px;font-weight:600;color:var(--volt-deep);text-decoration:none}
+.site:hover{text-decoration:underline}
+footer{font:400 11px 'JetBrains Mono',monospace;color:var(--smoke);text-align:center;margin-top:14px;letter-spacing:.04em}
 </style>
 </head>
 <body>
@@ -48,9 +50,8 @@ footer{font:400 11px 'JetBrains Mono',monospace;color:var(--smoke);text-align:ce
     <a class="btn main" href="3-lab.vcf" download="3-LAB.vcf">Salva contatto</a>
     <a class="btn" href="https://wa.me/393791801764">WhatsApp <small>+39 379 180 1764</small></a>
     <a class="btn" href="mailto:info@3-lab.it">Scrivici <small>info@3-lab.it</small></a>
-    <a class="btn" href="https://3-lab.it/#contact">Prenota una demo <small>→</small></a>
-    <a class="btn" href="https://3-lab.it">Visita il sito <small>3-lab.it</small></a>
   </nav>
+  <a class="site" href="https://3-lab.it">3-lab.it</a>
   <footer>TRI LAB © 2026</footer>
 </main>
 </body>
