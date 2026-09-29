@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>3-LAB — Biglietto da visita</title>
 <meta name="description" content="3-LAB: ingegneria, economia e AI generativa per le PMI. Salva il contatto.">
-<meta name="theme-color" content="#e6e6e6">
+<meta name="theme-color" content="#0c0e0d">
 <link rel="icon" href="../logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,31 +13,31 @@
 <style>
 :root{--ink:#000;--paper:#fff;--canvas:#e6e6e6;--slate:#444;--smoke:#8f8f8f;--ash:#c6c6c6;--volt:#19E67C;--volt-deep:#0aa859;--signal:#FF3B30;--navy:#2b2d51}
 *{box-sizing:border-box;margin:0}
-body{min-height:100svh;display:grid;place-items:center;padding:24px 16px;background:var(--canvas);color:var(--ink);font:16px/1.5 'Inter',system-ui,sans-serif}
-.card{width:100%;max-width:400px;background:var(--paper);border-radius:28px;padding:36px 28px 28px;box-shadow:0 30px 60px -30px rgba(0,0,0,.35)}
-.mark{width:88px;height:auto;display:block}
-h1{font:400 64px/.9 'Anton',sans-serif;letter-spacing:-.02em;text-transform:uppercase;margin-top:18px;color:var(--navy)}
+body{min-height:100svh;display:grid;place-items:center;padding:16px;background-color:#0c0e0d;background-image:radial-gradient(60% 45% at 50% 30%,rgba(25,230,124,.22),transparent 70%),radial-gradient(45% 35% at 85% 90%,rgba(255,59,48,.16),transparent 70%),radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:auto,auto,26px 26px;background-attachment:fixed;color:var(--ink);font:16px/1.5 'Inter',system-ui,sans-serif}
+.card{width:100%;max-width:400px;background:var(--paper);border-radius:28px;padding:24px 20px 18px;border:2px solid var(--volt);box-shadow:0 0 0 4px rgba(25,230,124,.18),0 0 40px rgba(25,230,124,.45)}
+.mark{width:72px;height:auto;display:block}
+h1{font:400 56px/.9 'Anton',sans-serif;letter-spacing:-.02em;text-transform:uppercase;margin-top:12px;color:var(--navy)}
 h1 .g{color:var(--volt-deep)}
 h1 .dash{margin-left:.07em}
-.tag{font:500 12px/1.4 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin-top:14px}
-.lead{color:var(--slate);margin-top:14px}
-.hubs{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.hubs span{font:500 12px 'JetBrains Mono',monospace;padding:6px 10px;border-radius:999px;background:var(--canvas)}
+.tag{font:500 11px/1.4 'JetBrains Mono',monospace;letter-spacing:.02em;text-transform:uppercase;color:var(--slate);margin-top:10px}
+.lead{color:var(--slate);margin-top:8px;font-size:14px;line-height:1.45}
+.hubs{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.hubs span{font:500 11px 'JetBrains Mono',monospace;padding:6px 9px;border-radius:999px;background:var(--canvas)}
 .hubs i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
-.actions{display:grid;gap:10px;margin-top:28px}
-.btn{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-radius:16px;text-decoration:none;font-weight:600;color:var(--ink);background:var(--canvas)}
+.actions{display:grid;gap:8px;margin-top:18px}
+.btn{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:16px;text-decoration:none;font-weight:600;color:var(--ink);background:var(--canvas)}
 .btn small{font:400 13px 'Inter',sans-serif;color:var(--slate)}
-.btn.main{background:var(--ink);color:var(--paper);padding:24px 22px;font-size:19px;border-radius:20px}
+.btn.main{background:var(--ink);color:var(--paper);padding:20px 22px;font-size:19px;border-radius:20px}
 .btn.main::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--volt)}
 .btn:focus-visible{outline:3px solid var(--volt-deep);outline-offset:2px}
-.site{display:block;text-align:center;margin-top:20px;font-weight:600;color:var(--volt-deep);text-decoration:none}
+.site{display:block;text-align:center;margin-top:16px;font-weight:600;color:var(--volt-deep);text-decoration:none}
 .site:hover{text-decoration:underline}
-footer{font:400 11px 'JetBrains Mono',monospace;color:var(--smoke);text-align:center;margin-top:14px;letter-spacing:.04em}
+footer{font:400 11px 'JetBrains Mono',monospace;color:var(--smoke);text-align:center;margin-top:10px;letter-spacing:.04em}
 </style>
 </head>
 <body>
 <main class="card">
-  <img class="mark" src="../logo.svg" alt="Logo 3-LAB" width="88" height="66">
+  <img class="mark" src="../logo.svg" alt="Logo 3-LAB" width="72" height="54">
   <h1>3<span class="dash">-</span><span class="g">LAB</span></h1>
   <p class="tag">Ingegneria · Economia · AI Generativa</p>
   <p class="lead">Il partner d'innovazione per le PMI: rigore economico, ottimizzazione ingegneristica e intelligenza artificiale.</p>
