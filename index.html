@@ -619,8 +619,11 @@ body.sm-open{overflow:hidden}
 .step-err a{color:inherit}
 .step-next:disabled{opacity:.6;cursor:wait}
 .step-done{text-align:center;padding:6px 0}
-.step-label{display:block;margin:14px 0 6px 20px;font-size:13px;font-weight:500;color:var(--ink)}
-.step-label span{color:var(--smoke);font-weight:400}
+.step-tel{position:relative;margin-top:10px}
+.step-tel .step-input{padding-right:190px}
+.step-tel span{position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:14px;color:#9a9a9a;pointer-events:none}
+.step-tel.pieno span{display:none}
+.step-tel.pieno .step-input{padding-right:20px}
 .cta-wa{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:12px 22px;border-radius:100px;background:var(--ink);color:#fff;font-weight:600;font-size:14px;text-decoration:none;transition:filter .2s}
 .cta-wa:hover{background:var(--graphite-2)}
 .cta-wa svg{color:#25D366}
@@ -1035,8 +1038,7 @@ body.sm-open{overflow:hidden}
         <h3>Provala. La demo è gratis 😎</h3>
         <p>Lascia la tua email e, se preferisci, anche il WhatsApp: ti ricontattiamo entro 24h con una mini-analisi del tuo caso.</p>
         <input class="step-input" type="email" id="demoEmail" placeholder="latua@email.it" aria-label="La tua email" autocomplete="email" required>
-        <label class="step-label" for="demoTel">WhatsApp <span>(facoltativo)</span></label>
-        <input class="step-input" type="tel" id="demoTel" value="+39 " placeholder="+39 333 123 4567" autocomplete="tel">
+        <div class="step-tel"><input class="step-input" type="tel" id="demoTel" value="+39 " aria-label="WhatsApp (facoltativo)" autocomplete="tel"><span aria-hidden="true">WhatsApp (facoltativo)</span></div>
         <input type="text" id="demoSito" name="sito" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="step-nav" style="justify-content:flex-end"><button class="step-next" type="button" data-next>Continua →</button></div>
       </div>
@@ -1414,6 +1416,7 @@ window.addEventListener('load',()=>ScrollTrigger.refresh());
     const tel=document.getElementById('demoTel');
     const TEL_RE=/^\+?[0-9]{8,15}$/;
     const telPulito=()=>{ const t=tel.value.replace(/[\s.\-()]/g,''); return /^\+?\d{0,3}$/.test(t)?'':t; };
+    tel.addEventListener('input',()=>tel.parentNode.classList.toggle('pieno',!!telPulito()));
     const err=document.getElementById('demoErr');
     const LEAD_URL='https://form.3-lab.it/lead';   // Worker in worker-contatti/
     async function invia(btn){
