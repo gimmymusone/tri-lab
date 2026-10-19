@@ -3126,18 +3126,17 @@ document.querySelectorAll('.faq-q').forEach(function(b){
   collect();
   if(matchMedia('(max-width:760px)').matches){   // telefono: elenco verticale al posto della ruota
     pin.classList.add('m');
-    const KEYS=['3card','salzillo','musone','laimpianti','gestionale','valentino','pivot','oc'],FIRST={generale:'3card',produzione:'gestionale',servizi:'oc',medici:'musone',ristorazione:'pivot',commercio:'3card',edilizia:'salzillo'};
+    const KEYS=['3card','salzillo','musone','laimpianti','gestionale','valentino','pivot','oc'],ORD=['oc','gestionale','3card','pivot','salzillo','laimpianti','musone','valentino'];   // stesso ordine della ruota
     const box=document.createElement('div');box.className='wm';
     box.innerHTML='<button type="button" class="btn wm-open">Vedi il portfolio <span class="arrow" aria-hidden="true">→</span></button><div class="wm-list" hidden></div>';
     pin.appendChild(box);
     const list=box.querySelector('.wm-list'),opn=box.querySelector('.wm-open'),reduceM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let first=0,built=false,io=null;
+    let ord=ORD,built=false,io=null;
     function build(){
       list.innerHTML='';if(io)io.disconnect();
       io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(!v.play)return;if(e.isIntersecting&&!reduceM)v.play().catch(()=>{});else v.pause()}),{threshold:.5});
-      const n=O.c.length;
-      for(let j=0;j<n;j++){
-        const i=(first+j)%n,card=O.c[i],logo=O.l[i],name=O.b[i].textContent.trim(),href=card.getAttribute('href'),ext=card.target==='_blank';
+      for(let j=0;j<ord.length;j++){
+        const i=KEYS.indexOf(ord[j]),card=O.c[i],logo=O.l[i],name=O.b[i].textContent.trim(),href=card.getAttribute('href'),ext=card.target==='_blank';
         const a=document.createElement('article');a.className='wm-c';a.style.animationDelay=(j*60)+'ms';
         const lg=document.createElement('div');lg.className='wm-logo';lg.appendChild(logo.cloneNode(true));a.appendChild(lg);
         const md=document.createElement(href?'a':'div');md.className='wm-media';if(href){md.href=href;if(ext){md.target='_blank';md.rel='noopener'}}
@@ -3150,7 +3149,7 @@ document.querySelectorAll('.faq-q').forEach(function(b){
       built=true;
     }
     opn.addEventListener('click',()=>{if(!built)build();list.hidden=false;opn.hidden=true;setTimeout(()=>list.scrollIntoView({behavior:reduceM?'auto':'smooth',block:'start'}),60)});
-    window.wwFirst=function(per){first=Math.max(0,KEYS.indexOf(FIRST[per]||'3card'));if(built)build()};
+    window.wwFirst=function(per){ord=per==='medici'?['musone'].concat(ORD.filter(x=>x!=='musone')):ORD;if(built)build()};
     try{window.wwFirst(localStorage.getItem('per')||'generale')}catch(e){window.wwFirst('generale')}
     return;
   }
@@ -3158,11 +3157,10 @@ document.querySelectorAll('.faq-q').forEach(function(b){
   const CARD_H=.5,RATIO=1.6,STEP=40,DRUM=2.22,LENS=2.7,RING_R=.78,BOW=1.82,TITLE=.088,INDEX=.04,CULL=1.6,EASE=.085;
   const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),lerp=(a,b,t)=>a+(b-a)*t,rad=d=>d*Math.PI/180;
   let turn=0,target=0,active=-1,M=null,visible=false,frame=0,playing=-1;
-  // il primo progetto dipende dal selettore «Per chi»; l'ordine resta ciclico
-  const KEYS=['3card','salzillo','musone','laimpianti','gestionale','valentino','pivot','oc'],FIRST={generale:'3card',produzione:'gestionale',servizi:'oc',medici:'musone',ristorazione:'pivot',commercio:'3card',edilizia:'salzillo'};
+  // ordine per importanza: prima i lavori più rilevanti (flusso OrientaCampus, gestionale L&A), i siti dopo, Valentino sempre ultimo; con «Per chi» = medici apre il sito del dott. Musone
+  const KEYS=['3card','salzillo','musone','laimpianti','gestionale','valentino','pivot','oc'],ORD=['oc','gestionale','3card','pivot','salzillo','laimpianti','musone','valentino'];
   window.wwFirst=function(per){
-    const k=Math.max(0,KEYS.indexOf(FIRST[per]||'3card')),n=O.c.length;
-    for(let j=0;j<n;j++){const i=(k+j)%n;wheel.appendChild(O.c[i]);logosBox.appendChild(O.l[i]);index.appendChild(O.b[i]);}
+    (per==='medici'?['musone'].concat(ORD.filter(x=>x!=='musone')):ORD).forEach(key=>{const i=KEYS.indexOf(key);wheel.appendChild(O.c[i]);logosBox.appendChild(O.l[i]);index.appendChild(O.b[i]);});
     collect();if(playing>=0&&vids[playing]){}playing=-1;active=-1;
   };
 
