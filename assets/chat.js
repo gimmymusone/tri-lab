@@ -114,9 +114,9 @@
     var corpo={messaggi:hist.map(function(m){return {ruolo:m.ruolo,testo:m.testo}}),pagina:location.pathname,settore:document.documentElement.dataset.per||'generale',profilo:prof,fase:fase};
     var ctl=new AbortController(),to=setTimeout(function(){ctl.abort()},14000);
     fetch(URL_CHAT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(corpo),signal:ctl.signal})
-      .then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})
+      .then(function(r){if(!r.ok)return r.json().then(function(j){throw {limite:j&&j.errore==='limite'}},function(){throw new Error(r.status)});return r.json()})
       .then(function(j){if(!j.ok||!j.reply)throw new Error('vuota');if(PERSONALE.test(j.reply))j.suggerimenti=[];typing(false);fondi(j.profilo);var az=(j.azioni||[]).filter(function(a){return a.tipo!=='prenota'||pronto()});if(pronto()&&!az.some(function(a){return a.tipo==='prenota'}))az.unshift({tipo:'prenota',testo:'Invia la richiesta'});addMsg('ai',j.reply,filtraAzioni(az).slice(0,2));suggerisci(j.suggerimenti)})
-      .catch(function(){typing(false);addMsg('ai','In questo momento non riesco a risponderti. Posso però farti parlare direttamente con noi: una call conoscitiva è gratuita e dura 30 minuti.',FALL,true)})
+      .catch(function(e){typing(false);addMsg('ai',e&&e.limite?'Hai fatto molte domande in poco tempo e ho raggiunto il limite per ora. Puoi riprovare tra un po\', oppure parlare direttamente con noi: una call conoscitiva è gratuita e dura 30 minuti.':'In questo momento non riesco a risponderti. Posso però farti parlare direttamente con noi: una call conoscitiva è gratuita e dura 30 minuti.',FALL,true)})
       .then(function(){clearTimeout(to);busy=false;send.disabled=false;inp.focus()});
   }
 
