@@ -55,3 +55,29 @@
   .pr-tel .pr-in{padding-right:12px}.pr-tel span{display:none}
 }
 @media(prefers-reduced-motion:reduce){.pr-m,.pr-ov,.pr-p.on{transition:none;animation:none}}
+
+/* ===== LIQUID GLASS: pannello, campi e pulsanti più arrotondati e traslucidi (stesso linguaggio di island, pulsanti e menu) ===== */
+.pr-ov.on{background:rgba(236,242,239,.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.pr-m{border-radius:34px;background:rgba(255,255,255,.66);-webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%);border:1px solid rgba(255,255,255,.8);
+  box-shadow:inset 2px -2px 1.5px -1px rgba(255,255,255,.95),inset -2px 2px 1.5px -1px rgba(255,255,255,.95),inset 0 1px 1px 0 rgba(255,255,255,.9),0 0 0 1px rgba(0,0,0,.05),0 34px 80px -24px rgba(0,0,0,.35)}
+.pr-b{padding:30px 28px 10px}
+.pr-in-s{margin:18px 0 0;padding:16px 18px;border:1px solid rgba(255,255,255,.85);border-radius:24px;background:rgba(255,255,255,.5);box-shadow:inset 0 1px 1px rgba(255,255,255,.9)}
+.pr-f{background:transparent;border-top:0;padding:10px 22px 22px;border-radius:0 0 34px 34px}
+.pr-btn{height:46px;padding:0 24px;border-radius:100px;font-size:14.5px;border:1px solid rgba(255,255,255,.85);
+  box-shadow:inset 2px -2px 1.5px -1px rgba(255,255,255,.9),inset -2px 2px 1.5px -1px rgba(255,255,255,.9),0 10px 24px -10px rgba(0,0,0,.25);transition:transform .25s cubic-bezier(.16,1,.3,1),background .2s}
+.pr-btn:hover{transform:translateY(-2px)}
+.pr-btn.s{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%);color:#111}
+.pr-btn.s:hover{background:rgba(255,255,255,.8)}
+.pr-btn.p{background:rgba(17,17,17,.92);color:#fff;border-color:rgba(255,255,255,.25)}
+.pr-btn.p:hover{background:#000}
+.pr-in{height:46px;border-radius:100px;padding:0 20px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.95);box-shadow:inset 0 1px 2px rgba(0,0,0,.06),0 6px 16px -10px rgba(0,0,0,.2)}
+.pr-tel .pr-in{padding-right:190px}.pr-tel span{right:20px}
+.pr-area{border-radius:24px;padding:14px 18px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.95);box-shadow:inset 0 1px 2px rgba(0,0,0,.06)}
+.pr-chip{height:40px;padding:0 18px;border-radius:100px;background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.9);box-shadow:inset 2px -2px 1.5px -1px rgba(255,255,255,.9),0 6px 16px -10px rgba(0,0,0,.25);transition:transform .2s cubic-bezier(.16,1,.3,1),background .2s}
+.pr-chip:hover{background:rgba(255,255,255,.9);transform:translateY(-1px)}
+.pr-chip.sel{background:#19E67C;border-color:rgba(255,255,255,.6)}
+.pr-wa{font-weight:500}
+@media(max-width:599px){.pr-m{border-radius:30px 30px 0 0}.pr-f{border-radius:0}.pr-tel .pr-in{padding-right:20px}}
+/* benvenuto: un clic sul settore mostra subito il sito; sotto, solo «Salta» */
+.pr-wel .pr-f{justify-content:center;padding-top:4px}
+.pr-wel .pr-chips{justify-content:flex-start}

@@ -24,11 +24,33 @@
   var prof={};try{prof=JSON.parse(sessionStorage.getItem(KP)||'{}')}catch(e){}
   function fondi(n){if(!n)return;Object.keys(n).forEach(function(k){if(typeof n[k]==='string'&&n[k].trim())prof[k]=n[k].trim()});try{sessionStorage.setItem(KP,JSON.stringify(prof))}catch(e){}}
   window.cwProfilo=function(){return prof};
+  var EM=/[^\s@,;<>()]+@[^\s@,;<>()]+\.[a-z]{2,}/i,TELR=/(?:\+?\d[\d\s.\-]{7,16}\d)/;
+  function leggi(testo){   // email e telefono scritti in chat: li teniamo noi, senza aspettare il modello
+    var e=testo.match(EM);if(e)prof.email=e[0].toLowerCase();
+    var t=testo.replace(EM,' ').match(TELR);if(t){var n=t[0].replace(/[\s.\-]/g,'');if(/^\+?\d{8,15}$/.test(n))prof.telefono=n}
+    try{sessionStorage.setItem(KP,JSON.stringify(prof))}catch(x){}
+  }
+  /* fasi: «info» (risponde a cosa facciamo) → «raccolta» (chiede le informazioni) solo dopo che il visitatore ha chiesto dei servizi */
+  var KF='cw-fase',fase='info';try{fase=sessionStorage.getItem(KF)||'info'}catch(e){}
+  var INTERESSE=/servizi|offrite|offri\b|cosa fate|prezz|cost[oi]|quanto|tariff|preventiv|metodo|come lavorate|come funziona|automazion|gestional|sito web|business plan|contabilit|brain|3card|fidelity|call|prenot/i;
+  function setFase(f){fase=f;try{sessionStorage.setItem(KF,f)}catch(e){}}
+  var q0=function(){return fase==='raccolta'?prossimo():null};
+  var atteso=null;   // campo a cui sta rispondendo il visitatore (domande di base fatte senza modello)
+  var perNow=function(){var p=document.documentElement.dataset.per;return p&&p!=='generale'?p:''};
+  function pronto(){return !!((prof.email||prof.telefono)&&prof.problema&&(prof.settore||prof.azienda||perNow()))}
+  /* cosa chiedere adesso, in ordine: attività → problema → nome → contatto */
+  function prossimo(){
+    if(!(prof.settore||prof.azienda||perNow()))return ['Di cosa si occupa la tua azienda?',['Ho un negozio','Studio professionale','Produzione'],'settore'];
+    if(!prof.problema)return ['Cosa ti rallenta di più oggi?',['Troppo lavoro a mano','Numeri poco chiari','Pochi clienti'],'problema'];
+    if(!prof.nome)return ['Come ti chiami?',[],'nome'];
+    if(!(prof.email||prof.telefono))return ['A quale email possiamo scriverti?',[],'email'];
+    return null;
+  }
 
   /* ---- azioni: indirizzano nel sito o aprono la prenotazione ---- */
   var SEZ={servizi:'#servizi',processo:'#come-lavoriamo',chisiamo:'#about'},PAG={ai:'ai/',portfolio:'case-study/'};
   function vai(tipo){
-    if(tipo==='prenota'){if(window.apriPrenota){close();window.apriPrenota()}else location.href=ROOT+'#contact';return}
+    if(tipo==='prenota'){if(window.apriPrenota){close();window.apriPrenota({veloce:pronto()})}else location.href=ROOT+'#contact';return}
     if(tipo==='whatsapp'){window.open('https://wa.me/393791801764?text=Ciao%203-LAB%2C%20vorrei%20saperne%20di%20pi%C3%B9','_blank','noopener');return}
     if(PAG[tipo]){location.href=ROOT+PAG[tipo];return}
     var h=SEZ[tipo];if(!h)return;
@@ -46,33 +68,35 @@
   function suggerisci(lista){chips.innerHTML='';(lista||[]).slice(0,3).forEach(function(t){var b=document.createElement('button');b.type='button';b.className='cw-a';b.textContent=t;b.addEventListener('click',function(){chiedi(t)});chips.appendChild(b)})}
 
   /* ---- risposte immediate alle domande di base (senza attendere il modello) ---- */
-  var AZP={tipo:'prenota',testo:'Prenota la call'};
   var RAPIDE=[
-    {re:/\b(ciao|salve|buongiorno|buonasera|hey|hola)\b/,r:function(){return ['Ciao! Di cosa si occupa la tua azienda?',[],['Ho un negozio','Studio professionale','Produzione']]}},
-    {re:/\b(prezz|cost|quanto (costa|costate|viene|spendo)|tariff|preventiv)/,r:function(){return ['I prezzi dipendono dal tuo caso: si definiscono nella call conoscitiva, gratuita e di 30 minuti. Di cosa ti occupi?',[AZP],['Ho un negozio','Studio professionale','Produzione']]}},
-    {re:/\b(servizi|offrite|offri|fate|vendete|cosa fate)\b/,r:function(){return ['Abbiamo sette servizi: business planning, automazioni agentiche, company brain, gestionali, sito web, growth e contabilità manageriale. Quale ti interessa di più?',[{tipo:'servizi',testo:'Vedi i servizi'}],['Automazioni','Sito web','Numeri e margini']]}},
-    {re:/\b(come lavorate|metodo|come funziona|processo)\b/,r:function(){return ['Lavoriamo con un metodo in sei passi: capiamo la situazione attuale, troviamo le cause, costruiamo la soluzione e la lasciamo a voi. Qual è il tuo problema oggi?',[{tipo:'processo',testo:'Vedi il metodo'}],['Troppo lavoro a mano','Numeri poco chiari','Sito fermo']]}},
-    {re:/\b(contatti|telefono|email|mail|whatsapp|dove siete|indirizzo|sede)\b/,r:function(){return ['Siamo a Marcianise (CE): info@3-lab.it, WhatsApp +39 379 180 1764. Se vuoi, fissiamo una call gratuita.',[AZP,{tipo:'whatsapp',testo:'Scrivici su WhatsApp'}],[]]}},
-    {re:/\b(chi siete|chi siamo|siete in)\b/,r:function(){return ['Siamo in tre: due economisti e un ingegnere gestionale. Uniamo numeri, processi e AI per le PMI. Di che azienda parliamo?',[{tipo:'chisiamo',testo:'Conosci il team'}],[]]}},
-    {re:/\b(call|prenot|appuntament|parlare con voi|essere (ri)?contattat)/,r:function(){return ['Volentieri! La call è gratuita e dura 30 minuti. Ti apro il modulo: ci basta la tua email.',[AZP],[]]}}
+    {re:/\b(ciao|salve|buongiorno|buonasera|hey|hola)\b/,r:function(){var q=q0();return q?['Ciao! '+q[0],[],q[1]]:['Ciao! Posso spiegarti come lavoriamo e quali servizi offriamo. Cosa vuoi sapere?',[],['Che servizi offrite?','Come lavorate?','Quanto costa?']]}},
+    {re:/\b(prezz|cost|quanto (costa|costate|viene|spendo)|tariff|preventiv)/,r:function(){var q=q0();return ['I prezzi dipendono dal tuo caso: li definiamo nella call conoscitiva, gratuita e di 30 minuti.'+(q?' Per prepararla, '+q[0].charAt(0).toLowerCase()+q[0].slice(1):''),[],q?q[1]:[]]}},
+    {re:/\b(servizi|offrite|offri|fate|vendete|cosa fate)\b/,r:function(){var q=q0();return ['Abbiamo sette servizi: business planning, automazioni agentiche, company brain, gestionali, sito web, growth e contabilità manageriale.'+(q?' '+q[0]:''),[{tipo:'servizi',testo:'Vedi i servizi'}],q?q[1]:[]]}},
+    {re:/\b(come lavorate|metodo|come funziona|processo)\b/,r:function(){var q=q0();return ['Lavoriamo in sei passi: capiamo la situazione attuale, troviamo le cause, costruiamo la soluzione e la lasciamo a voi.'+(q?' '+q[0]:''),[{tipo:'processo',testo:'Vedi il metodo'}],q?q[1]:[]]}},
+    {re:/\b(contatti|telefono|whatsapp|dove siete|indirizzo|sede)\b/,r:function(){return ['Siamo a Marcianise (CE): info@3-lab.it, WhatsApp +39 379 180 1764.',[{tipo:'whatsapp',testo:'Scrivici su WhatsApp'}],[]]}},
+    {re:/\b(chi siete|chi siamo|siete in)\b/,r:function(){var q=q0();return ['Siamo in tre: due economisti e un ingegnere gestionale. Uniamo numeri, processi e AI per le PMI.'+(q?' '+q[0]:''),[{tipo:'chisiamo',testo:'Conosci il team'}],q?q[1]:[]]}},
+    {re:/\b(call|prenot|appuntament|parlare con voi|essere (ri)?contattat)/,r:function(){
+      setFase('raccolta');
+      if(pronto())return ['Perfetto, ho tutto: ti preparo la richiesta, basta una conferma.',[{tipo:'prenota',testo:'Invia la richiesta'}],[]];
+      var q=q0();return ['Volentieri! Per preparare la call mi servono due o tre informazioni. '+q[0],[],q[1]]}}
   ];
-  function rapida(t){
-    var s=t.toLowerCase();if(s.split(/\s+/).length>8)return null;
-    for(var i=0;i<RAPIDE.length;i++)if(RAPIDE[i].re.test(s))return RAPIDE[i].r();
-    return null;
-  }
+  function voce(t){var s=t.toLowerCase();if(s.split(/\s+/).length>8)return null;for(var i=0;i<RAPIDE.length;i++)if(RAPIDE[i].re.test(s))return RAPIDE[i];return null}
+  function rapida(t){var v=voce(t);if(!v)return null;var r=v.r();var q=q0();atteso=q&&/\?/.test(r[0])?q[2]:null;return r}
 
-  var FALL=[{tipo:'prenota',testo:'Prenota una call'},{tipo:'whatsapp',testo:'Scrivici su WhatsApp'}];
+  var FALL=[{tipo:'prenota',testo:'Prenota una call'},{tipo:'whatsapp',testo:'Scrivici su WhatsApp'}];   // ripiego: se il servizio non risponde, almeno un modo per contattarci
   function chiedi(testo){
     if(busy||!testo.trim())return;busy=true;send.disabled=true;chips.innerHTML='';
-    addMsg('u',testo.trim());inp.value='';typing(true);
+    if(fase==='info'&&INTERESSE.test(testo))setFase('raccolta');
+    addMsg('u',testo.trim());leggi(testo);
+    if(atteso&&!voce(testo)&&!prof[atteso]&&atteso!=='email'){prof[atteso]=testo.trim().slice(0,160);try{sessionStorage.setItem(KP,JSON.stringify(prof))}catch(x){}}if(!voce(testo))atteso=null;
+    inp.value='';typing(true);
     var q=rapida(testo.trim());
     if(q){setTimeout(function(){typing(false);addMsg('ai',q[0],q[1]);suggerisci(q[2]);busy=false;send.disabled=false;inp.focus()},450);return}
-    var corpo={messaggi:hist.map(function(m){return {ruolo:m.ruolo,testo:m.testo}}),pagina:location.pathname,settore:document.documentElement.dataset.per||'generale',profilo:prof};
+    var corpo={messaggi:hist.map(function(m){return {ruolo:m.ruolo,testo:m.testo}}),pagina:location.pathname,settore:document.documentElement.dataset.per||'generale',profilo:prof,fase:fase};
     var ctl=new AbortController(),to=setTimeout(function(){ctl.abort()},14000);
     fetch(URL_CHAT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(corpo),signal:ctl.signal})
       .then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})
-      .then(function(j){if(!j.ok||!j.reply)throw new Error('vuota');typing(false);fondi(j.profilo);addMsg('ai',j.reply,j.azioni);suggerisci(j.suggerimenti)})
+      .then(function(j){if(!j.ok||!j.reply)throw new Error('vuota');typing(false);fondi(j.profilo);var az=(j.azioni||[]).filter(function(a){return a.tipo!=='prenota'||pronto()});if(pronto()&&!az.some(function(a){return a.tipo==='prenota'}))az.unshift({tipo:'prenota',testo:'Invia la richiesta'});addMsg('ai',j.reply,az.slice(0,2));suggerisci(j.suggerimenti)})
       .catch(function(){typing(false);addMsg('ai','In questo momento non riesco a risponderti. Posso però farti parlare direttamente con noi: una call conoscitiva è gratuita e dura 30 minuti.',FALL,true)})
       .then(function(){clearTimeout(to);busy=false;send.disabled=false;inp.focus()});
   }
@@ -88,12 +112,11 @@
     edilizia:['Margine per commessa','Preventivi','Gestionale di cantiere']};
   function benvenuto(){
     var per=document.documentElement.dataset.per||'generale',sett=SETT[per],path=location.pathname;
-    var msg,sug;
-    if(sett){msg='Ciao! Vedo che lavori in '+(per==='medici'?'ambito medico':sett)+'. Cosa ti rallenta di più oggi?';sug=CHIPS[per]}
-    else if(/\/ai\/?$/.test(path)){msg='Ciao! Qui parliamo di come l\'AI lavora dentro i processi. Che attività ripetitive hai in azienda?';sug=['Email e preventivi','Fatture e dati','Assistenza clienti']}
-    else if(/case-study/.test(path)){msg='Ciao! Ti incuriosisce uno di questi progetti? Dimmi di che azienda parliamo e cerco il caso più vicino.';sug=['Ho un negozio','Studio professionale','Produzione']}
-    else{msg='Ciao! Sono l\'assistente di 3-LAB. Di cosa si occupa la tua azienda?';sug=['Ho un negozio','Studio professionale','Produzione','Che servizi offrite?']}
-    return [msg,sug];
+    atteso=null;
+    if(sett)return ['Ciao! Vedo che lavori in '+(per==='medici'?'ambito medico':sett)+'. Posso spiegarti come lavoriamo e quali servizi fanno al caso tuo.',['Che servizi mi servono?','Come lavorate?','Quanto costa?']];
+    if(/\/ai\/?$/.test(path))return ['Ciao! Posso spiegarti come l\'AI lavora dentro i processi di un\'azienda.',['Cosa fa un agente AI?','Che servizi offrite?','Come lavorate?']];
+    if(/case-study/.test(path))return ['Ciao! Posso raccontarti come sono nati questi progetti e quali servizi abbiamo usato.',['Che servizi offrite?','Come lavorate?']];
+    return ['Ciao! Sono l\'assistente di 3-LAB. Posso spiegarti come lavoriamo e quali servizi offriamo. Cosa vuoi sapere?',['Che servizi offrite?','Come lavorate?','Chi siete?','Quanto costa?']];
   }
   function inizio(){
     if(!hist.length){var b=benvenuto();addMsg('ai',b[0]);suggerisci(b[1])}

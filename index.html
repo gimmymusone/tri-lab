@@ -922,7 +922,7 @@ body.sm-open{overflow:hidden}
 .ai-steps li{display:flex;align-items:center;gap:10px;background:var(--mist);border-radius:16px;padding:12px 14px;font-weight:600;font-size:14px;line-height:1.25}
 .ai-steps i{font:500 11px/1 var(--f-mono);font-style:normal;width:24px;height:24px;border-radius:50%;background:var(--volt);display:grid;place-items:center;flex:none}
 .ai-stage{max-width:880px;margin:0 auto;background:var(--mist);border-radius:28px;padding:clamp(18px,3vw,32px)}
-.ais-s1,.ais-s2{display:grid;grid-template-columns:1.2fr auto 1fr;gap:22px;align-items:center}
+.ais-s1,.ais-s2{display:grid;grid-template-columns:1fr auto 1fr;gap:22px;align-items:center}
 .ais-s2{margin-top:22px}
 .ais-tabs{display:flex;gap:8px;justify-content:center;margin-bottom:22px}
 .ais-tabs i{font:500 11px/1 var(--f-mono);font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--mist);display:grid;place-items:center}
@@ -1638,7 +1638,7 @@ html{scroll-snap-type:y proximity}
 .ww-pin.open{height:calc(100vh + var(--n) * 55vh);height:calc(100svh + var(--n) * 55svh)}
 .ww-pin:not(.open) .ww-snap,.ww-pin:not(.open) .ww-index{display:none}
 .ww-open{position:absolute;left:50%;top:50%;translate:-50% -50%;z-index:200;font-size:16px;padding:16px 30px;white-space:nowrap}
-.ww-label{transform:translateY(calc(-1.2em - 52px))}
+.ww-label{display:none}
 .ww-snap{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start;pointer-events:none}
 .ww{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;user-select:none;-webkit-user-select:none}
 .ww-stage{position:absolute;inset:0}
@@ -1783,13 +1783,15 @@ html{scroll-snap-type:y proximity}
 .a3-per b{color:var(--ink);font-weight:600}
 .a3-x:empty{display:none}
 .a3-x{padding-top:0;margin-top:-14px}
-.a3-x li::before{background:var(--ink)}
 /* Menu: voci vicine, nere, in alto, corsivo serif, una riga; numeri incolonnati a destra e in grassetto */
 .sm-panel-list{flex:0 0 auto;justify-content:flex-start;gap:.15rem;min-height:0}
 .sm-item-wrap{flex:none;display:flex;align-items:center}
 .sm-item{display:block;width:100%;white-space:nowrap;color:#000;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;font-size:clamp(3rem,min(13vw,8.2vh),4.9rem);line-height:1.08;padding-right:2.2em}
 .sm-item:hover{color:var(--sm-accent)}
 .sm-panel-list[data-numbering] .sm-item::after{top:50%;right:0;transform:translateY(-50%);font-style:normal;font-weight:700}
+/* niente barra di scorrimento laterale (la pagina scorre comunque) */
+html{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 /* banner scorrevole sotto la hero: Anton */
 .marquee-item{font-family:'Anton',sans-serif;font-weight:400;font-size:30px;letter-spacing:.01em}
 @media(max-width:640px){
@@ -2259,7 +2261,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
       </li>
       <li class="a3-i">
         <h3 class="a3-h"><button type="button" class="a3-b" id="a3-b2" aria-expanded="false" aria-controls="a3-r2"><span class="a3-n">02</span><span class="a3-tt"><span class="a3-k">Current Situation</span><span class="a3-t">Situazione attuale</span></span><svg class="a3-plus" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M8 1V15M1 8H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></h3>
-        <div class="a3-r" id="a3-r2" role="region" aria-labelledby="a3-b2"><div><p>Fotografiamo l'azienda com'è oggi: bilanci, margini, flussi di lavoro e punti in cui il lavoro si ferma.</p><ul class="a3-d"><li><b>Almeno 15 giorni</b> per capire come lavorate davvero, osservando il lavoro com'è</li><li><b>Mappa dei processi</b> com'è oggi: chi fa cosa e dove il lavoro si ferma</li><li><b>Punto di partenza misurato</b>, per poter dimostrare il miglioramento</li></ul><ul class="a3-d a3-x" data-x></ul></div></div>
+        <div class="a3-r" id="a3-r2" role="region" aria-labelledby="a3-b2"><div><p>Fotografiamo l'azienda com'è oggi: bilanci, margini, flussi di lavoro e punti in cui il lavoro si ferma.</p><ul class="a3-d"><li><b>Almeno 7 giorni</b> per capire come lavorate davvero, osservando il lavoro com'è</li><li><b>Mappa dei processi</b> com'è oggi: chi fa cosa e dove il lavoro si ferma</li><li><b>Punto di partenza misurato</b>, per poter dimostrare il miglioramento</li></ul><ul class="a3-d a3-x" data-x></ul></div></div>
       </li>
       <li class="a3-i">
         <h3 class="a3-h"><button type="button" class="a3-b" id="a3-b3" aria-expanded="false" aria-controls="a3-r3"><span class="a3-n">03</span><span class="a3-tt"><span class="a3-k">Analysis</span><span class="a3-t">Cause radice</span></span><svg class="a3-plus" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false"><path d="M8 1V15M1 8H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></h3>

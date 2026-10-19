@@ -59,3 +59,7 @@
 .of-y{fill:#067a41}.of-x{fill:#ff3b30}
 .of-dot{fill:#0aa859}.of-dot--ko{fill:#ff3b30}.of-dot--br{fill:#6a8cff}
 .cs-flow .of{max-width:900px;margin:0 auto}
+
+/* niente barra di scorrimento laterale (la pagina scorre comunque) */
+html{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
