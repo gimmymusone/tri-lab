@@ -3194,7 +3194,7 @@ document.querySelectorAll('.faq-q').forEach(function(b){
     if(playing>=0&&vids[playing]){vids[playing].pause();vids[playing].currentTime=0;}
     playing=n;
     const v=n>=0?vids[n]:null;
-    if(v&&!reduce){v.currentTime=0;v.playbackRate=+v.dataset.rate||1;v.play().catch(()=>{});}
+    if(v&&!reduce){v.currentTime=0;v.playbackRate=(+v.dataset.rate||1)*0.5;v.play().catch(()=>{});}
   }
   function draw(){
     frame=visible?requestAnimationFrame(draw):0;
