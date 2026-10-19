@@ -497,8 +497,11 @@ body.modal-open{overflow:hidden}
   .ai-scene{display:grid;grid-row:span 5;grid-template-rows:subgrid;row-gap:14px;align-content:start}
   .ai-scene .p-link{align-self:end}
 }
-@media(max-width:900px){.ai-scene{grid-row:auto}}
+@media(max-width:900px){.ai-scene{display:flex;flex-direction:column;grid-row:auto;grid-template-rows:none;row-gap:0;gap:14px}.ai-scene .p-link{align-self:flex-start}}
 
 /* niente barra di scorrimento laterale (la pagina scorre comunque) */
 html{scrollbar-width:none;-ms-overflow-style:none}
 html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
+
+/* banner finale («Quale sistema serve alla tua azienda?» / «Dove togliere lavoro…»): il testo parte già nella sua posizione, senza animazione di ingresso che lo sposta */
+.hub-bigcta .reveal{opacity:1!important;transform:none!important;transition:none!important}

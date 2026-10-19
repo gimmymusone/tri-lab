@@ -1821,10 +1821,8 @@ try{if(sessionStorage.getItem('lf-visto'))document.documentElement.classList.add
 .lf-name i{font-style:normal;color:#19E67C}
 .lf-logo{position:relative;z-index:2;width:min(72vw,560px);aspect-ratio:680/460;transform-origin:50% 50%}
 .lf-logo svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.lf-logo svg path{fill:none;stroke-width:40;stroke-linejoin:miter;stroke-linecap:butt;stroke-miterlimit:10}
-.lf-logo img{position:absolute;display:block;width:117.647%;height:130.435%;left:-8.824%;top:-13.043%;max-width:none;opacity:0;transition:opacity .45s ease}
-.lf-logo.ok img{opacity:1}
-.lf-logo.ok svg{opacity:0;transition:opacity .45s ease .1s}
+.lf-logo svg path{fill:none;stroke-linejoin:miter;stroke-linecap:butt;stroke-miterlimit:10}
+.lf-logo img{position:absolute;display:block;width:117.647%;height:130.435%;left:-8.824%;top:-13.043%;max-width:none;opacity:0}
 .lf-n{--n:clamp(100px,20vw,180px);position:absolute;right:clamp(14px,2.4vw,28px);bottom:clamp(14px,2.4vw,28px);z-index:2;display:flex;align-items:baseline;gap:.06em;line-height:.8;font-weight:400}
 .lf-n span{font-size:var(--n);color:#19E67C;font-variant-numeric:tabular-nums}
 .lf-n u{text-decoration:none;font-size:calc(var(--n)*.75);font-weight:700;color:#000}
@@ -1837,12 +1835,7 @@ try{if(sessionStorage.getItem('lf-visto'))document.documentElement.classList.add
   <canvas id="lfCanvas"></canvas>
   <div class="lf-name">3<i>-</i>LAB</div>
   <div class="lf-logo" id="lfLogo">
-    <svg viewBox="60 60 680 460" focusable="false" style="overflow:visible">
-      <!-- una sola linea continua: nero (T1) → verde (T2) → rosso (T3), il cambio di colore avviene nei due incroci dell'intreccio -->
-      <path id="p1" stroke="#111111" d="M296.4 291.25L410 490L90 490L250 210L296.4 291.25"/>
-      <path id="p2" stroke="#19E67C" d="M296.4 291.25L240 390L560 390L503.6 291.25L400 110L296.4 291.25L400 110L503.6 291.25"/>
-      <path id="p3" stroke="#FF3B30" d="M503.6 291.25L390 490L710 490L550 210L503.6 291.25"/>
-    </svg>
+    <svg viewBox="60 60 680 460" focusable="false" style="overflow:visible"><defs><clipPath id="lfA"><polygon points="302.2,347.55 245,314.75 290.6,234.95 347.8,267.75"/></clipPath><clipPath id="lfB"><polygon points="509.4,347.55 452.2,314.75 497.8,234.95 555,267.75"/></clipPath></defs><!-- una sola linea continua, con gli stessi aloni bianchi del logo: nero (T1) → verde (T2) → rosso (T3); i cambi di colore sono nei due incroci --><path class="h" id="h1" stroke="#fff" stroke-width="46" d="M296.4 291.25L410 490L90 490L250 210L296.4 291.25L305.5 307.2"/><path id="p1" stroke="#111111" stroke-width="40" d="M296.4 291.25L410 490L90 490L250 210L296.4 291.25L305.5 307.2"/><path class="h" id="h2" stroke="#fff" stroke-width="46" d="M296.4 291.25L240 390L560 390L503.6 291.25L400 110L296.4 291.25L400 110L503.6 291.25"/><path id="p2" stroke="#19E67C" stroke-width="40" d="M296.4 291.25L240 390L560 390L503.6 291.25L400 110L296.4 291.25L400 110L503.6 291.25"/><path class="h" id="h3" stroke="#fff" stroke-width="46" d="M503.6 291.25L390 490L710 490L550 210L503.6 291.25L494.5 307.2"/><path id="p3" stroke="#FF3B30" stroke-width="40" d="M503.6 291.25L390 490L710 490L550 210L503.6 291.25L494.5 307.2"/><g id="wv" opacity="0"><path stroke="#fff" stroke-width="46" clip-path="url(#lfA)" d="M250 210L410 490L90 490Z"/><path stroke="#111111" stroke-width="40" clip-path="url(#lfA)" d="M250 210L410 490L90 490Z"/><path stroke="#fff" stroke-width="46" clip-path="url(#lfB)" d="M400 110L560 390L240 390Z"/><path stroke="#19E67C" stroke-width="40" clip-path="url(#lfB)" d="M400 110L560 390L240 390Z"/></g></svg>
     <img src="logo.svg" alt="">
   </div>
   <div class="lf-n"><span id="lfN">0</span><u>%</u></div>
@@ -1855,13 +1848,15 @@ try{if(sessionStorage.getItem('lf-visto'))document.documentElement.classList.add
   // il sito parte sempre dalla hero: niente ripristino dello scroll né ancore all'apertura
   try{history.scrollRestoration='manual';if(location.hash)history.replaceState(null,'',location.pathname+location.search)}catch(e){}
   scrollTo(0,0);h.style.overflow='hidden';
-  var ps=['p1','p2','p3'].map(function(i){return document.getElementById(i)}),
+  var ids=['1','2','3'],ps=ids.map(function(i){return document.getElementById('p'+i)}),hs=ids.map(function(i){return document.getElementById('h'+i)}),wv=document.getElementById('wv'),svgEl=ps[0].ownerSVGElement,img=document.querySelector('#lfLogo img'),
       len=ps.map(function(p){return p.getTotalLength()}),tot=len.reduce(function(a,b){return a+b},0),
       n=document.getElementById('lfN'),logo=document.getElementById('lfLogo'),D=4000,t0=performance.now();
-  ps.forEach(function(p,i){p.style.strokeDasharray=len[i]+' '+len[i];p.style.strokeDashoffset=len[i]});
+  ps.concat(hs).forEach(function(p,i){var k=i%3;p.style.strokeDasharray=len[k]+' '+len[k];p.style.strokeDashoffset=len[k]});
   function f(now){
-    var t=Math.min((now-t0)/D,1),e=1-Math.pow(1-t,3),L=e*tot,c=0;
-    ps.forEach(function(p,i){var v=Math.max(0,Math.min(len[i],L-c));p.style.strokeDashoffset=len[i]-v;c+=len[i]});
+    var t=Math.min((now-t0)/D,1),e=1-Math.pow(1-t,3),d=Math.min(e/0.95,1),L=d*tot,c=0,k=Math.max(0,Math.min(1,(e-0.95)/0.05));
+    ps.forEach(function(p,i){var v=Math.max(0,Math.min(len[i],L-c));p.style.strokeDashoffset=len[i]-v;hs[i].style.strokeDashoffset=len[i]-v;c+=len[i]});
+    wv.setAttribute('opacity',d>=1?1:0);                       // l'intreccio compare a disegno finito
+    img.style.opacity=k;svgEl.style.opacity=1-k;               // dal 95% al 100%: dal disegno al logo vero
     n.textContent=Math.round(100*e);
     if(t<1)requestAnimationFrame(f);else fine();
   }
