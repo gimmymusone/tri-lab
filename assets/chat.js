@@ -58,6 +58,21 @@
     if(isHome){var t=document.querySelector(h);if(t){var r=document.documentElement;r.style.scrollBehavior='auto';t.scrollIntoView({block:'start'});requestAnimationFrame(function(){r.style.scrollBehavior=''});if(innerWidth<600)close()}}
     else{location.href=ROOT+h}
   }
+  /* un pulsante di navigazione compare una volta sola per sessione, e mai se il visitatore è già lì */
+  var KM='cw-mostrate',mostrate=[];try{mostrate=JSON.parse(sessionStorage.getItem(KM)||'[]')}catch(e){}
+  var SEZID={servizi:'servizi',processo:'come-lavoriamo',chisiamo:'about'};
+  function giaQui(tipo){
+    var id=SEZID[tipo];if(id){var e=document.getElementById(id);if(e){var r=e.getBoundingClientRect();if(r.top<innerHeight*.7&&r.bottom>innerHeight*.3)return true}}
+    if(tipo==='ai'&&/\/ai\/?$/.test(location.pathname))return true;
+    if(tipo==='portfolio'&&/case-study/.test(location.pathname))return true;
+    return false;
+  }
+  function filtraAzioni(az){
+    return (az||[]).filter(function(a){
+      if(a.tipo==='prenota'||a.tipo==='whatsapp')return true;
+      if(mostrate.indexOf(a.tipo)>-1||giaQui(a.tipo))return false;
+      mostrate.push(a.tipo);try{sessionStorage.setItem(KM,JSON.stringify(mostrate))}catch(e){}return true});
+  }
   function addMsg(ruolo,testo,azioni,nosave){
     var b=document.createElement('div');b.className='cw-b '+(ruolo==='ai'?'ai':'u');b.textContent=testo;msgs.appendChild(b);
     if(azioni&&azioni.length){var a=document.createElement('div');a.className='cw-act';azioni.forEach(function(x){var bt=document.createElement('button');bt.type='button';bt.className='cw-a'+(x.tipo==='prenota'?' p':'');bt.textContent=x.testo;bt.addEventListener('click',function(){vai(x.tipo)});a.appendChild(bt)});msgs.appendChild(a)}
@@ -65,7 +80,11 @@
     if(!nosave){hist.push({ruolo:ruolo,testo:testo,azioni:azioni||[]});save()}
   }
   function typing(on){var t=msgs.querySelector('.cw-dots');if(on&&!t){t=document.createElement('div');t.className='cw-dots';t.innerHTML='<i></i><i></i><i></i>';msgs.appendChild(t);msgs.scrollTop=msgs.scrollHeight}else if(!on&&t)t.remove()}
-  function suggerisci(lista){chips.innerHTML='';(lista||[]).slice(0,3).forEach(function(t){var b=document.createElement('button');b.type='button';b.className='cw-a';b.textContent=t;b.addEventListener('click',function(){chiedi(t)});chips.appendChild(b)})}
+  /* suggerimenti = possibili risposte del visitatore, non scorciatoie di navigazione («Vedi…», «Scopri…»): quelle sono già nei pulsanti */
+  /* dati personali (nome, email, telefono): mai risposte pronte, solo il campo libero, altrimenti si rischia di avere dati inventati per pigrizia */
+  var PERSONALE=/come ti chiami|il tuo nome|tuo nome|cognome|tua email|tua mail|indirizzo email|la tua e-?mail|whatsapp|telefono|numero di|recapito|a quale (email|mail)/i;
+  var NAVSUG=/^(vedi|scopri|mostrami|apri|guarda|vai)\b/i;
+  function suggerisci(lista){lista=(lista||[]).filter(function(t){return !NAVSUG.test(String(t).trim())});chips.innerHTML='';(lista||[]).slice(0,3).forEach(function(t){var b=document.createElement('button');b.type='button';b.className='cw-a';b.textContent=t;b.addEventListener('click',function(){chiedi(t)});chips.appendChild(b)})}
 
   /* ---- risposte immediate alle domande di base (senza attendere il modello) ---- */
   var RAPIDE=[
@@ -91,12 +110,12 @@
     if(atteso&&!voce(testo)&&!prof[atteso]&&atteso!=='email'){prof[atteso]=testo.trim().slice(0,160);try{sessionStorage.setItem(KP,JSON.stringify(prof))}catch(x){}}if(!voce(testo))atteso=null;
     inp.value='';typing(true);
     var q=rapida(testo.trim());
-    if(q){setTimeout(function(){typing(false);addMsg('ai',q[0],q[1]);suggerisci(q[2]);busy=false;send.disabled=false;inp.focus()},450);return}
+    if(q){setTimeout(function(){typing(false);addMsg('ai',q[0],filtraAzioni(q[1]));suggerisci(PERSONALE.test(q[0])?[]:q[2]);busy=false;send.disabled=false;inp.focus()},450);return}
     var corpo={messaggi:hist.map(function(m){return {ruolo:m.ruolo,testo:m.testo}}),pagina:location.pathname,settore:document.documentElement.dataset.per||'generale',profilo:prof,fase:fase};
     var ctl=new AbortController(),to=setTimeout(function(){ctl.abort()},14000);
     fetch(URL_CHAT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(corpo),signal:ctl.signal})
       .then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})
-      .then(function(j){if(!j.ok||!j.reply)throw new Error('vuota');typing(false);fondi(j.profilo);var az=(j.azioni||[]).filter(function(a){return a.tipo!=='prenota'||pronto()});if(pronto()&&!az.some(function(a){return a.tipo==='prenota'}))az.unshift({tipo:'prenota',testo:'Invia la richiesta'});addMsg('ai',j.reply,az.slice(0,2));suggerisci(j.suggerimenti)})
+      .then(function(j){if(!j.ok||!j.reply)throw new Error('vuota');if(PERSONALE.test(j.reply))j.suggerimenti=[];typing(false);fondi(j.profilo);var az=(j.azioni||[]).filter(function(a){return a.tipo!=='prenota'||pronto()});if(pronto()&&!az.some(function(a){return a.tipo==='prenota'}))az.unshift({tipo:'prenota',testo:'Invia la richiesta'});addMsg('ai',j.reply,filtraAzioni(az).slice(0,2));suggerisci(j.suggerimenti)})
       .catch(function(){typing(false);addMsg('ai','In questo momento non riesco a risponderti. Posso però farti parlare direttamente con noi: una call conoscitiva è gratuita e dura 30 minuti.',FALL,true)})
       .then(function(){clearTimeout(to);busy=false;send.disabled=false;inp.focus()});
   }

@@ -1806,7 +1806,11 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
 </style>
 
 <link rel="stylesheet" href="assets/casestudy.css">
-<script>try{if(sessionStorage.getItem('lf-visto'))document.documentElement.classList.add('lf-skip')}catch(e){}</script>
+<script>
+/* Aggiornamento della pagina (anche forzato): il sito riparte da capo, con loader, benvenuto «Per chi lavori?» e chat azzerata. Cambiare pagina dentro il sito, invece, non rifà il loader. */
+try{var _n=performance.getEntriesByType('navigation')[0];if(_n&&_n.type==='reload'){sessionStorage.removeItem('lf-visto');['cw-hist','cw-fase','cw-prof'].forEach(function(k){sessionStorage.removeItem(k)});localStorage.removeItem('per-scelto');localStorage.removeItem('per')}}catch(e){}
+try{if(sessionStorage.getItem('lf-visto'))document.documentElement.classList.add('lf-skip')}catch(e){}
+</script>
 <style>
 .lf-skip .lf{display:none}
 /* LOADER: il caricamento è il logo che si disegna (una sola linea); a 100% diventa il logo vero, si ingrandisce e si disperde. Fallback CSS: se il JS non parte, si scopre comunque. */
