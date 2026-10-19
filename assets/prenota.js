@@ -40,6 +40,26 @@
       if(n===3){foot.innerHTML='<span></span><button type="button" class="pr-btn p" data-fine>Chiudi</button>';$(foot,'[data-fine]').addEventListener('click',P.close)}}
     tel.addEventListener('input',function(){tel.parentNode.classList.toggle('pieno',!!telPulito())});
     try{var e0=localStorage.getItem('lead-email');if(e0)em.value=e0}catch(x){}
+    /* precompila con ciò che il visitatore ha detto all'assistente (e il settore scelto): niente va perso */
+    var msg=$(ov,'[data-msg]'),NOMI={produzione:'Produzione e manifattura',servizi:'Servizi professionali',medici:'Studi medici e sanità',ristorazione:'Ristorazione e ospitalità',commercio:'Commercio e negozi',edilizia:'Edilizia e impianti'};
+    msg.addEventListener('input',function(){msg.dataset.t='1'});
+    P.riempi=function(){
+      var pr={},hs=[];try{pr=JSON.parse(sessionStorage.getItem('cw-prof')||'{}')}catch(x){}try{hs=JSON.parse(sessionStorage.getItem('cw-hist')||'[]')}catch(x){}
+      if(pr.email&&!em.value.trim()&&/.+@.+\..+/.test(pr.email))em.value=pr.email;
+      if(pr.telefono&&!telPulito()){tel.value=pr.telefono;tel.parentNode.classList.add('pieno')}
+      if(pr.interesse&&!$(ov,'.pr-chip.sel'))$$(ov,'.pr-chip').forEach(function(c){if(c.textContent.trim()===pr.interesse)c.classList.add('sel')});
+      if(msg.dataset.t)return;
+      var per=document.documentElement.dataset.per,r=[];
+      if(pr.nome)r.push('Nome: '+pr.nome);
+      var sett=pr.settore||NOMI[per];if(sett)r.push('Settore: '+sett);
+      if(pr.azienda)r.push('Azienda: '+pr.azienda);
+      if(pr.dimensione)r.push('Dimensione: '+pr.dimensione);
+      if(pr.problema)r.push('Cosa cerca / cosa lo rallenta: '+pr.problema);
+      var ult=hs.filter(function(m){return m.ruolo==='u'}).slice(-3).map(function(m){return m.testo}).join(' | ');
+      if(!r.length&&!ult)return;
+      var t='Dalla chat con l\'assistente — '+r.join(' · ')+(ult?(r.length?'. ':'')+'Ultimi messaggi: '+ult:'')+'.';
+      msg.value=t.slice(0,950);
+    };
     function manda(){
       var sel=$(ov,'.pr-chip.sel');next.disabled=true;next.textContent='Invio…';err.hidden=true;
       invia({email:em.value.trim(),telefono:telPulito()||null,interesse:sel?sel.textContent.trim():null,messaggio:$(ov,'[data-msg]').value.trim(),pagina:location.href,sito:$(ov,'[data-hp]').value})
@@ -56,7 +76,7 @@
     [em,tel].forEach(function(i){i.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();avanti()}})});
     $$(ov,'.pr-chip').forEach(function(c){c.addEventListener('click',function(){$$(ov,'.pr-chip').forEach(function(x){x.classList.remove('sel')});c.classList.add('sel')})});
   }
-  window.apriPrenota=function(){if(!P)creaPrenota();P.open()};
+  window.apriPrenota=function(){if(!P)creaPrenota();P.riempi();P.open()};
   document.addEventListener('click',function(e){
     var a=e.target.closest&&e.target.closest('a');if(!a)return;
     var h=a.getAttribute('href')||'';
