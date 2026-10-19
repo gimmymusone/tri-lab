@@ -325,7 +325,7 @@ img{max-width:100%;display:block}
 .marquee{background:var(--volt);color:var(--ink);padding:20px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:5}
 .marquee-track{display:inline-flex;gap:0;will-change:transform}
 .marquee-item{font-family:var(--f-display);font-weight:600;font-size:26px;text-transform:uppercase;letter-spacing:-.01em;padding:0 26px;display:inline-flex;align-items:center;gap:26px}
-.marquee-item::after{content:'✳';font-size:16px;color:var(--ink)}
+.marquee-item::after{content:'';width:18px;height:18px;background:var(--ink);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2v20M3.3 7l17.4 10M3.3 17L20.7 7' stroke='%23000' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2v20M3.3 7l17.4 10M3.3 17L20.7 7' stroke='%23000' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
 
 /* ---------- BIO (decrypt) ---------- */
 .decrypt{display:inline-block;background:var(--ink);color:var(--ink);padding:0 8px;border-radius:5px;cursor:crosshair;transition:background .25s,color .25s;position:relative}
@@ -1670,6 +1670,26 @@ html{scroll-snap-type:y proximity}
 .ww-index button:focus-visible{outline:1px solid var(--ink);outline-offset:2px}
 @media(max-width:760px){.ww-wheel{top:45%}.ww-index{display:none}.ww-logos{left:0;right:0;top:auto;bottom:3%;width:auto;display:grid;place-items:center}.wl{left:50%;width:auto;max-width:86%;transform:translate(-50%,-50%)}}
 
+/* Portfolio su telefono: niente ruota 3D, ma un elenco verticale (logo, anteprima, link) che si apre col pulsante */
+.ww-pin.m{height:auto;width:auto;margin-left:0}
+.ww-pin.m .ww,.ww-pin.m .ww-snap{display:none}
+.wm{padding:8px 0 4px;text-align:center}
+.wm-open{font-size:16px;padding:16px 30px}
+.wm-list{display:grid;gap:22px;margin-top:6px;text-align:left}
+.wm-list[hidden]{display:none}
+.wm-c{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:22px;padding:16px;box-shadow:0 18px 40px -26px rgba(0,0,0,.35);animation:wmIn .5s cubic-bezier(.16,1,.3,1) both}
+@keyframes wmIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.wm-logo{display:flex;align-items:center;min-height:54px;margin-bottom:12px}
+.wm-logo .wl{position:static!important;transform:none!important;opacity:1!important;width:auto!important;max-width:100%;left:auto;top:auto}
+.wm-logo .wl img{max-height:48px;max-width:150px}
+.wm-logo .wl img.tall{max-height:48px}
+.wm-logo .wm-3card{font-size:40px}.wm-logo .wm-oc{font-size:28px}
+.wm-media{position:relative;display:block;aspect-ratio:1.6;border-radius:14px;overflow:hidden;background:#e9e9e9;text-decoration:none;color:inherit}
+.wm-media .ww-face{position:absolute;inset:0;width:100%;height:100%;border-radius:0;box-shadow:none}
+.wm-media .ww-act{display:none}
+.wm-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+.wm-foot b{font:600 16px var(--f-sans);letter-spacing:-.01em}
+.wm-foot .btn{padding:10px 18px;font-size:14px;flex:none}
 /* OrientaCampus: flusso */
 .ww-oc{background:#fff;display:grid;place-items:center;padding:3%}
 .of{width:100%;height:auto;display:block}
@@ -1726,6 +1746,9 @@ html{scroll-snap-type:y proximity}
 
 /* ================= TELEFONO (2026-10-18): header, island e pulsanti in scala ================= */
 @media(max-width:640px){
+  .hero-inner{grid-template-rows:1fr auto}
+  .hero-top{align-self:center}
+  .hero-head .hero-sub{display:none}
   .sm-header{padding:12px 14px}
   .sm-logo-mark{width:28px;height:24px}
   .sm-toggle{height:44px;width:44px;padding:0;justify-content:center;gap:0}
@@ -1767,6 +1790,8 @@ html{scroll-snap-type:y proximity}
 .sm-item{display:block;width:100%;white-space:nowrap;color:#000;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;font-size:clamp(3rem,min(13vw,8.2vh),4.9rem);line-height:1.08;padding-right:2.2em}
 .sm-item:hover{color:var(--sm-accent)}
 .sm-panel-list[data-numbering] .sm-item::after{top:50%;right:0;transform:translateY(-50%);font-style:normal;font-weight:700}
+/* banner scorrevole sotto la hero: Anton */
+.marquee-item{font-family:'Anton',sans-serif;font-weight:400;font-size:30px;letter-spacing:.01em}
 @media(max-width:640px){
   .per{position:fixed;top:66px;right:14px;z-index:122}
   .per-b{height:36px;padding:0 12px;font-size:12px}
@@ -1779,7 +1804,9 @@ html{scroll-snap-type:y proximity}
 </style>
 
 <link rel="stylesheet" href="assets/casestudy.css">
+<script>try{if(sessionStorage.getItem('lf-visto'))document.documentElement.classList.add('lf-skip')}catch(e){}</script>
 <style>
+.lf-skip .lf{display:none}
 /* LOADER: il caricamento è il logo che si disegna (una sola linea); a 100% diventa il logo vero, si ingrandisce e si disperde. Fallback CSS: se il JS non parte, si scopre comunque. */
 .lf{position:fixed;inset:0;z-index:99999;background:#fff;color:#000;display:grid;place-items:center;font-family:'Anton',sans-serif;transition:opacity .6s ease;animation:lf-fs .4s ease 8s forwards}
 .lf.bye{opacity:0}
@@ -1792,7 +1819,6 @@ html{scroll-snap-type:y proximity}
 .lf-logo img{position:absolute;display:block;width:117.647%;height:130.435%;left:-8.824%;top:-13.043%;max-width:none;opacity:0;transition:opacity .45s ease}
 .lf-logo.ok img{opacity:1}
 .lf-logo.ok svg{opacity:0;transition:opacity .45s ease .1s}
-.lf-logo.go{transition:transform 1.1s cubic-bezier(.55,0,.85,.3),opacity 1s ease-in .1s;transform:scale(10);opacity:0}
 .lf-n{--n:clamp(100px,20vw,180px);position:absolute;right:clamp(14px,2.4vw,28px);bottom:clamp(14px,2.4vw,28px);z-index:2;display:flex;align-items:baseline;gap:.06em;line-height:.8;font-weight:400}
 .lf-n span{font-size:var(--n);color:#19E67C;font-variant-numeric:tabular-nums}
 .lf-n u{text-decoration:none;font-size:calc(var(--n)*.75);font-weight:700;color:#000}
@@ -1818,7 +1844,8 @@ html{scroll-snap-type:y proximity}
 <script>
 (function(){
   var h=document.documentElement,lf=document.getElementById('lf');
-  if(/[?&]solo/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches){lf.remove();window.__lfDone=true;return}
+  var visto=false;try{visto=!!sessionStorage.getItem('lf-visto');sessionStorage.setItem('lf-visto','1')}catch(e){}   // il loader c'è solo alla prima apertura del sito (per sessione)
+  if(visto||/[?&]solo/.test(location.search)||matchMedia('(prefers-reduced-motion: reduce)').matches){lf.remove();window.__lfDone=true;return}
   // il sito parte sempre dalla hero: niente ripristino dello scroll né ancore all'apertura
   try{history.scrollRestoration='manual';if(location.hash)history.replaceState(null,'',location.pathname+location.search)}catch(e){}
   scrollTo(0,0);h.style.overflow='hidden';
@@ -1834,9 +1861,8 @@ html{scroll-snap-type:y proximity}
   }
   function fine(){
     logo.classList.add('ok');                                  // il disegno diventa il logo vero, identico per grandezza
-    setTimeout(function(){logo.classList.add('go');window.__disp=true},800);   // zoom e dispersione
-    setTimeout(function(){lf.classList.add('bye')},1500);
-    setTimeout(function(){window.__lfDone=true;scrollTo(0,0);lf.remove();h.style.overflow=''},2200);
+    setTimeout(function(){lf.classList.add('bye')},900);   // il logo è completo: il sito si apre
+    setTimeout(function(){window.__lfDone=true;scrollTo(0,0);lf.remove();h.style.overflow=''},1600);
   }
   requestAnimationFrame(f);
 })();
@@ -1849,7 +1875,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(window.__lfDone) return;
 
-  const CFG = { count:1600, magnetRadius:9, ringRadius:9, waveSpeed:0.4, waveAmplitude:1,
+  const CFG = { count:(innerWidth<700?260:1600), magnetRadius:9, ringRadius:9, waveSpeed:0.4, waveAmplitude:1,
     particleSize:1.5, lerpSpeed:0.06, color:0x19E67C, autoAnimate:true, particleVariance:1,
     rotationSpeed:0, depthFactor:1, pulseSpeed:3, fieldStrength:10 };
 
@@ -1973,13 +1999,13 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
         <svg class="di-glyph" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
         <span class="di-label">Servizi</span>
       </a>
-      <a href="#ai" class="di-link" data-id="ai" role="menuitem" aria-label="AI">
-        <svg class="di-glyph" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
-        <span class="di-label">AI</span>
-      </a>
       <a href="#come-lavoriamo" class="di-link" data-id="processo" role="menuitem" aria-label="Processo">
         <svg class="di-glyph" viewBox="0 0 24 24"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>
         <span class="di-label">Processo</span>
+      </a>
+      <a href="#ai" class="di-link" data-id="ai" role="menuitem" aria-label="AI">
+        <svg class="di-glyph" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+        <span class="di-label">AI</span>
       </a>
       <a href="#case-study" class="di-link" data-id="case" role="menuitem" aria-label="Case study">
         <svg class="di-glyph" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
@@ -2031,8 +2057,8 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
     <div class="sm-panel-inner">
       <ul class="sm-panel-list" data-numbering>
         <li class="sm-item-wrap"><a class="sm-item" href="#servizi"><span class="sm-item-label">Servizi</span></a></li>
-        <li class="sm-item-wrap"><a class="sm-item" href="#ai"><span class="sm-item-label">L'AI</span></a></li>
-        <li class="sm-item-wrap"><a class="sm-item" href="#case-study"><span class="sm-item-label">Case study</span></a></li>
+        <li class="sm-item-wrap"><a class="sm-item" href="ai/"><span class="sm-item-label">L'AI</span></a></li>
+        <li class="sm-item-wrap"><a class="sm-item" href="case-study/"><span class="sm-item-label">Case study</span></a></li>
         <li class="sm-item-wrap"><a class="sm-item" href="#about"><span class="sm-item-label">Chi Siamo</span></a></li>
         <li class="sm-item-wrap"><a class="sm-item" href="#contact"><span class="sm-item-label">Contatti</span></a></li>
       </ul>
@@ -2123,15 +2149,15 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
       <div class="term-body">
         <div class="tl tl-t"><span class="tl-p">&gt;</span> <span class="ty">3-lab metodo --avvia</span></div>
         <div class="tl tl-t"><span class="tl-p">&gt;</span> <span class="ty">01 Analizziamo i tuoi dati</span></div>
-        <div class="tl tl-ok">✔ Analisi. Da dove partiamo? Un quadro chiaro di come funziona davvero la tua azienda, senza stime a occhio.</div>
+        <div class="tl tl-ok">✔&#xFE0E; Analisi. Da dove partiamo? Un quadro chiaro di come funziona davvero la tua azienda, senza stime a occhio.</div>
         <div class="tl tl-t"><span class="tl-p">&gt;</span> <span class="ty">02 Ti aiutiamo a decidere dove portare la tua azienda</span></div>
-        <div class="tl tl-ok">✔ Piano. Dove vado? Sai dove porti l'azienda, chi fa cosa e quanto costa.</div>
+        <div class="tl tl-ok">✔&#xFE0E; Piano. Dove vado? Sai dove porti l'azienda, chi fa cosa e quanto costa.</div>
         <div class="tl tl-t"><span class="tl-p">&gt;</span> <span class="ty">03 Costruiamo con te il sistema per arrivarci</span></div>
-        <div class="tl tl-ok">✔ Execution. Come ci arrivo? Processi chiari e strumenti su misura, che reggono anche quando noi non ci siamo.</div>
+        <div class="tl tl-ok">✔&#xFE0E; Execution. Come ci arrivo? Processi chiari e strumenti su misura, che reggono anche quando noi non ci siamo.</div>
         <div class="tl tl-t"><span class="tl-p">&gt;</span> <span class="ty">04 Ti forniamo la bussola per accorgerti subito quando stai deviando</span></div>
-        <div class="tl tl-ok">✔ Bussola. Sto deviando? Sai subito dove intervenire, senza aspettare il bilancio.</div>
-        <div class="tl tl-ok">✔ Ogni mese, previsto contro reale: Costi reali per prodotto e cliente, e dove la realtà si discosta.</div>
-        <div class="tl tl-info">ℹ Ogni passo ha i suoi servizi: <a href="#servizi">vedi i servizi →</a></div>
+        <div class="tl tl-ok">✔&#xFE0E; Bussola. Sto deviando? Sai subito dove intervenire, senza aspettare il bilancio.</div>
+        <div class="tl tl-ok">✔&#xFE0E; Ogni mese, previsto contro reale: Costi reali per prodotto e cliente, e dove la realtà si discosta.</div>
+        <div class="tl tl-info">ℹ&#xFE0E; Ogni passo ha i suoi servizi: <a href="#servizi">vedi i servizi →</a></div>
         <div class="tl tl-mu ty-end">Fatto. Il metodo è pronto, e resta a te.</div>
       </div>
     </div>
@@ -2588,10 +2614,12 @@ mm.add({
   /* ---- marquee loop ---- */
   const track=document.getElementById('marquee');
   if(track && !reduced){
-    // duplicate for seamless loop
+    // duplicate for seamless loop (misura dopo il caricamento dei font: Anton cambia la larghezza)
     track.innerHTML += track.innerHTML;
-    const half = track.scrollWidth/2;
-    gsap.to(track,{x:-half,duration:22,ease:'none',repeat:-1});
+    (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>{
+      const half = track.scrollWidth/2;
+      gsap.to(track,{x:-half,duration:22,ease:'none',repeat:-1});
+    });
   }
 
   return ()=>{ /* cleanup handled by matchMedia */ };
@@ -2637,7 +2665,16 @@ window.addEventListener('load',()=>ScrollTrigger.refresh());
     if(teamLink){ teamLink.style.opacity = v?'1':'0'; teamLink.style.transform = v?'translateY(0)':'translateY(16px)'; }
   }
   toggle.addEventListener('click', ()=>setOpen(!open));
-  wrap.querySelectorAll('.sm-item, .sm-socials-link[href^="#"]').forEach(a=>a.addEventListener('click', ()=>setOpen(false)));
+  wrap.querySelectorAll('.sm-item, .sm-socials-link[href^="#"]').forEach(a=>a.addEventListener('click', e=>{
+    setOpen(false);
+    const h=a.getAttribute('href');
+    if(h&&h.charAt(0)==='#'&&h.length>1){   // sezioni della home: salto diretto, senza scorrere tutto il sito
+      const t=document.querySelector(h); if(!t) return;
+      e.preventDefault();
+      const r=document.documentElement; r.style.scrollBehavior='auto'; t.scrollIntoView({block:'start'}); history.replaceState(null,'',h);
+      requestAnimationFrame(()=>{r.style.scrollBehavior='';});
+    }
+  }));
   document.addEventListener('mousedown', e=>{ if(open && !panel.contains(e.target) && !toggle.contains(e.target)) setOpen(false); });
   document.addEventListener('keydown', e=>{ if(e.key==='Escape' && open) setOpen(false); });
 })();
@@ -2947,8 +2984,8 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
     { id: '#top', link: byId('top') },
     { id: '#core', link: byId('core') },
     { id: '#servizi', link: byId('servizi') },
-    { id: '#ai', link: byId('ai') },
     { id: '#come-lavoriamo', link: byId('processo') },
+    { id: '#ai', link: byId('ai') },
     { id: '#case-study', link: byId('case') },
     { id: '#about', link: byId('about') },
     { id: '#faq', link: byId('faq') },
@@ -3087,6 +3124,36 @@ document.querySelectorAll('.faq-q').forEach(function(b){
   const O={c:[].slice.call(wheel.querySelectorAll('.ww-card')),l:[].slice.call(logosBox.querySelectorAll('.wl')),b:[].slice.call(index.querySelectorAll('li'))};
   function collect(){cards=[].slice.call(wheel.querySelectorAll('.ww-card'));faces=cards.map(c=>c.firstElementChild);vids=faces.map(f=>f.querySelector('video'));logos=[].slice.call(logosBox.querySelectorAll('.wl'));btns=[].slice.call(index.querySelectorAll('button'));}
   collect();
+  if(matchMedia('(max-width:760px)').matches){   // telefono: elenco verticale al posto della ruota
+    pin.classList.add('m');
+    const KEYS=['3card','salzillo','musone','laimpianti','gestionale','valentino','pivot','oc'],FIRST={generale:'3card',produzione:'gestionale',servizi:'oc',medici:'musone',ristorazione:'pivot',commercio:'3card',edilizia:'salzillo'};
+    const box=document.createElement('div');box.className='wm';
+    box.innerHTML='<button type="button" class="btn wm-open">Vedi il portfolio <span class="arrow" aria-hidden="true">→</span></button><div class="wm-list" hidden></div>';
+    pin.appendChild(box);
+    const list=box.querySelector('.wm-list'),opn=box.querySelector('.wm-open'),reduceM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let first=0,built=false,io=null;
+    function build(){
+      list.innerHTML='';if(io)io.disconnect();
+      io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(!v.play)return;if(e.isIntersecting&&!reduceM)v.play().catch(()=>{});else v.pause()}),{threshold:.5});
+      const n=O.c.length;
+      for(let j=0;j<n;j++){
+        const i=(first+j)%n,card=O.c[i],logo=O.l[i],name=O.b[i].textContent.trim(),href=card.getAttribute('href'),ext=card.target==='_blank';
+        const a=document.createElement('article');a.className='wm-c';a.style.animationDelay=(j*60)+'ms';
+        const lg=document.createElement('div');lg.className='wm-logo';lg.appendChild(logo.cloneNode(true));a.appendChild(lg);
+        const md=document.createElement(href?'a':'div');md.className='wm-media';if(href){md.href=href;if(ext){md.target='_blank';md.rel='noopener'}}
+        const face=card.firstElementChild.cloneNode(true);md.appendChild(face);a.appendChild(md);
+        const ft=document.createElement('div');ft.className='wm-foot';ft.innerHTML='<b></b>';ft.firstChild.textContent=name;
+        if(href){const l=document.createElement('a');l.className='btn';l.href=href;if(ext){l.target='_blank';l.rel='noopener'}l.innerHTML=(ext?'Apri il sito':'Vedi il caso')+' <span class="arrow" aria-hidden="true">→</span>';ft.appendChild(l)}
+        a.appendChild(ft);list.appendChild(a);
+        const v=face.querySelector('video');if(v){v.removeAttribute('autoplay');io.observe(v)}
+      }
+      built=true;
+    }
+    opn.addEventListener('click',()=>{if(!built)build();list.hidden=false;opn.hidden=true;setTimeout(()=>list.scrollIntoView({behavior:reduceM?'auto':'smooth',block:'start'}),60)});
+    window.wwFirst=function(per){first=Math.max(0,KEYS.indexOf(FIRST[per]||'3card'));if(built)build()};
+    try{window.wwFirst(localStorage.getItem('per')||'generale')}catch(e){window.wwFirst('generale')}
+    return;
+  }
   const N=cards.length,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const CARD_H=.5,RATIO=1.6,STEP=40,DRUM=2.22,LENS=2.7,RING_R=.78,BOW=1.82,TITLE=.088,INDEX=.04,CULL=1.6,EASE=.085;
   const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),lerp=(a,b,t)=>a+(b-a)*t,rad=d=>d*Math.PI/180;
@@ -3190,8 +3257,11 @@ document.querySelectorAll('.faq-q').forEach(function(b){
   document.addEventListener('click',function(e){if(!m.hidden&&!e.target.closest('#per'))open(false)});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!m.hidden){open(false);b.focus()}});
   var k='generale';try{k=localStorage.getItem('per')||k}catch(e){}
+  window.perSet=set;
   set(k);
 })();
 </script>
+<script src="assets/prenota.js" data-benvenuto defer></script>
+<script src="assets/chat.js" defer></script>
 </body>
 </html>

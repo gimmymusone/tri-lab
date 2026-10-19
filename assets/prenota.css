@@ -1,0 +1,57 @@
+/* Popup in stile «modal» (overlay + pannello centrato su desktop, drawer dal basso su mobile): prenotazione e benvenuto. Autonomo dagli stili della pagina. */
+.pr-ov{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;transition:background .3s;font-family:'Inter',system-ui,sans-serif;color:#171717}
+.pr-ov.on{background:rgba(250,250,250,.8);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);pointer-events:auto}
+.pr-m{display:flex;flex-direction:column;width:540px;max-width:calc(100vw - 24px);max-height:min(800px,80vh);overflow-y:auto;background:#fff;border-radius:12px;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 1px 1px rgba(0,0,0,.02),0 8px 16px -4px rgba(0,0,0,.04),0 24px 32px -8px rgba(0,0,0,.06);opacity:0;transform:scale(.95);pointer-events:none;transition:opacity .3s,transform .3s}
+.pr-ov.on .pr-m{opacity:1;transform:none;pointer-events:auto}
+.pr-b{padding:24px;font-size:14px;overflow-y:auto}
+.pr-h{margin-bottom:22px}
+.pr-t{margin:0 0 6px;font:600 24px/1.2 'Inter',sans-serif;letter-spacing:-.029rem}
+.pr-s{margin:0;font-size:16px;line-height:1.5;color:#444}
+.pr-in-s{margin:0 -24px;padding:20px 24px;border-top:1px solid #eaeaea;border-bottom:1px solid #eaeaea;background:#fafafa}
+.pr-f{position:sticky;bottom:0;padding:16px;display:flex;justify-content:space-between;gap:10px;flex-shrink:0;background:#fafafa;border-top:1px solid rgba(0,0,0,.08);border-radius:0 0 12px 12px}
+.pr-btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 14px;border-radius:6px;font:500 14px 'Inter',sans-serif;cursor:pointer;transition:background .15s;border:1px solid transparent;white-space:nowrap}
+.pr-btn.p{background:#171717;color:#fff}.pr-btn.p:hover{background:#383838}
+.pr-btn.s{background:#fff;color:#171717;border-color:rgba(0,0,0,.08)}.pr-btn.s:hover{background:rgba(0,0,0,.05)}
+.pr-btn:disabled{background:#f2f2f2;color:#8f8f8f;border-color:#ebebeb;cursor:not-allowed}
+.pr-btn:focus-visible{outline:0;box-shadow:0 0 0 2px #fff,0 0 0 4px #0aa859}
+/* passi */
+.pr-dots{display:flex;align-items:center;margin-bottom:18px}
+.pr-dot{width:28px;height:28px;border-radius:50%;background:#ededed;color:#8f8f8f;display:flex;align-items:center;justify-content:center;font:600 12px 'JetBrains Mono',ui-monospace,monospace;flex:0 0 auto;transition:all .3s}
+.pr-dot.active,.pr-dot.done{background:#0aa859;color:#fff}
+.pr-conn{height:2px;flex:1;background:#ededed;margin:0 8px;position:relative;overflow:hidden;border-radius:2px}
+.pr-conn i{position:absolute;inset:0;width:0;background:#0aa859;transition:width .4s}
+.pr-conn.done i{width:100%}
+.pr-p{display:none}.pr-p.on{display:block;animation:prIn .35s ease}
+@keyframes prIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.pr-p p{margin:0 0 14px;font-size:14px;line-height:1.5;color:#444}
+.pr-in{width:100%;height:40px;border:1px solid rgba(0,0,0,.14);border-radius:6px;padding:0 12px;font:400 14px 'Inter',sans-serif;color:#171717;outline:none;background:#fff;transition:box-shadow .15s,border-color .15s}
+.pr-in:focus{border-color:#0aa859;box-shadow:0 0 0 3px rgba(10,168,89,.15)}
+.pr-in.bad{border-color:#FF3B30}
+.pr-tel{position:relative;margin-top:10px}
+.pr-tel .pr-in{padding-right:176px}
+.pr-tel span{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:13px;color:#8f8f8f;pointer-events:none}
+.pr-tel.pieno span{display:none}.pr-tel.pieno .pr-in{padding-right:12px}
+.pr-chips{display:flex;gap:8px;flex-wrap:wrap}
+.pr-chip{height:36px;padding:0 14px;border:1px solid rgba(0,0,0,.12);border-radius:100px;font:400 14px 'Inter',sans-serif;cursor:pointer;background:#fff;color:#171717;transition:all .15s}
+.pr-chip:hover{background:rgba(0,0,0,.04)}
+.pr-chip.sel{border-color:#0aa859;background:#d1ffca;font-weight:500}
+.pr-area{width:100%;margin-top:14px;border:1px solid rgba(0,0,0,.14);border-radius:6px;padding:10px 12px;font:400 14px/1.5 'Inter',sans-serif;color:#171717;outline:none;resize:vertical;min-height:84px;transition:box-shadow .15s,border-color .15s}
+.pr-area:focus{border-color:#0aa859;box-shadow:0 0 0 3px rgba(10,168,89,.15)}
+.pr-err{margin:12px 0 0;font-size:13px;color:#FF3B30}.pr-err a{color:inherit}
+.pr-done{text-align:center;padding:10px 0}.pr-done .big{font-size:44px;line-height:1;margin-bottom:8px}.pr-done b{display:block;font-size:20px;margin-bottom:6px}
+.pr-wa{display:inline-flex;align-items:center;gap:8px;font:500 13px 'Inter',sans-serif;color:#171717;text-decoration:none}
+.pr-wa svg{color:#25D366}.pr-wa:hover{text-decoration:underline}
+.pr-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.pr-note{margin:10px 0 0;font-size:12.5px;line-height:1.45;color:#6b6b6b}
+.pr-wel .pr-in{margin-top:16px}
+.pr-wel .pr-chip.sel{background:#19E67C;border-color:#19E67C}
+/* mobile: drawer dal basso */
+@media(max-width:599px){
+  .pr-ov{align-items:flex-end}
+  .pr-ov.on{background:rgba(0,0,0,.4)}
+  .pr-m{width:100%;max-width:none;max-height:92vh;border-radius:12px 12px 0 0;opacity:1;transform:translateY(100%);transition:transform .3s}
+  .pr-ov.on .pr-m{transform:none}
+  .pr-f{border-radius:0}
+  .pr-tel .pr-in{padding-right:12px}.pr-tel span{display:none}
+}
+@media(prefers-reduced-motion:reduce){.pr-m,.pr-ov,.pr-p.on{transition:none;animation:none}}

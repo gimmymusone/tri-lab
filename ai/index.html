@@ -22,10 +22,15 @@ body{--f-display:'Inter',ui-sans-serif,system-ui,sans-serif;--f-serif:'Instrumen
 .hub-bigcta h2{font-size:clamp(38px,6.4vw,92px);line-height:1.2}
 .foot-logo span{font-weight:600;letter-spacing:-.02em}
 .serif{font-family:var(--f-serif);font-style:italic;font-weight:400;letter-spacing:-.01em;font-size:1.12em}
-.rn{white-space:nowrap}
+.rn{position:relative;display:inline-block;line-height:1;padding-bottom:.12em;white-space:nowrap}
+/* sottolineatura verde a mano: è un pezzo del testo (ancorata alla parola), non una misura in pixel: sempre alla stessa distanza, anche se il layout si sposta */
+.rn::after{content:"";position:absolute;left:-.04em;right:-.04em;bottom:-.02em;height:.16em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%230aa859' stroke-width='3' stroke-linecap='round' vector-effect='non-scaling-stroke'%3E%3Cpath d='M2 7 C22 3 42 10 62 6 S100 4 118 6' vector-effect='non-scaling-stroke'/%3E%3Cpath d='M4 9 C30 6 56 10 80 7 S108 8 116 7' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3C/svg%3E") no-repeat center/100% 100%;clip-path:inset(0 100% 0 0);transition:clip-path .9s cubic-bezier(.4,0,.2,1)}
+.rn.rn-on::after{clip-path:inset(0 0 0 0)}
+@media(prefers-reduced-motion:reduce){.rn::after{clip-path:none;transition:none}}
 .hub-hero .hub-tagline{margin-top:36px}
 .hub-h2{padding-bottom:10px}
 </style>
+<script>try{sessionStorage.setItem('lf-visto','1')}catch(e){}</script>
 </head>
 <body style="--acc:var(--navy)">
 <div class="brandbar"></div>
@@ -66,7 +71,7 @@ body{--f-display:'Inter',ui-sans-serif,system-ui,sans-serif;--f-serif:'Instrumen
             <li><span>AI operating system</span>L'AI che usa quel brain dentro i processi: risponde, prepara, aggiorna.</li>
           </ul>
         </div>
-        <div class="flag-viz" aria-hidden="true"><div class="br-scene"><span class="br-d" style="--x:-36;--y:-42;--i:0">Documenti</span><span class="br-d" style="--x:0;--y:-42;--i:1">Contesto competitivo</span><span class="br-d" style="--x:36;--y:-42;--i:2">Procedure</span><span class="br-d" style="--x:-38;--y:-18;--i:3">Clienti</span><span class="br-d" style="--x:38;--y:-18;--i:4">Preventivi</span><span class="br-d" style="--x:-38;--y:18;--i:5">Decisioni</span><span class="br-d" style="--x:38;--y:18;--i:6">Listini</span><span class="br-d" style="--x:-36;--y:42;--i:7">Organigramma</span><span class="br-d" style="--x:0;--y:42;--i:8">Brand identity</span><span class="br-d" style="--x:36;--y:42;--i:9">Contratti</span><span class="br-c"><b>Brain</b><small>cervello AI aziendale</small></span><div class="br-chat"><p style="--k:0">Buongiorno! Tre cose da sapere oggi:</p><p style="--k:1">Il cliente Rossi ti deve ancora <b>700 €</b>. Preparo il sollecito?</p><p style="--k:2">Il listino di un tuo fornitore è salito del <b>30%</b> negli ultimi 30 giorni.</p><p style="--k:3">I fornitori ti stanno facendo prezzi <b>progressivamente migliori</b>. Buon momento per rinegoziare.</p></div></div></div>
+        <div class="flag-viz" aria-hidden="true"><div class="br-scene"><span class="br-d" style="--x:-36;--y:-42;--i:0">Documenti</span><span class="br-d" style="--x:0;--y:-42;--i:1">Contesto competitivo</span><span class="br-d" style="--x:36;--y:-42;--i:2">Procedure</span><span class="br-d" style="--x:-38;--y:-18;--i:3">Clienti</span><span class="br-d" style="--x:38;--y:-18;--i:4">Preventivi</span><span class="br-d" style="--x:-38;--y:18;--i:5">Decisioni</span><span class="br-d" style="--x:38;--y:18;--i:6">Listini</span><span class="br-d" style="--x:-36;--y:42;--i:7">Organigramma</span><span class="br-d" style="--x:0;--y:42;--i:8">Brand identity</span><span class="br-d" style="--x:36;--y:42;--i:9">Contratti</span><svg class="br-w" viewBox="0 0 130 100" aria-hidden="true"><line x1="18.2" y1="8" x2="65" y2="50"/><line x1="65.0" y1="8" x2="65" y2="50"/><line x1="111.8" y1="8" x2="65" y2="50"/><line x1="15.6" y1="32" x2="65" y2="50"/><line x1="114.4" y1="32" x2="65" y2="50"/><line x1="15.6" y1="68" x2="65" y2="50"/><line x1="114.4" y1="68" x2="65" y2="50"/><line x1="18.2" y1="92" x2="65" y2="50"/><line x1="65.0" y1="92" x2="65" y2="50"/><line x1="111.8" y1="92" x2="65" y2="50"/></svg><span class="br-c"><svg viewBox="6 4 108 86" aria-hidden="true"><path class="br-o" d="M58 14C50 8 36 10 30 18C20 18 12 28 16 38C8 44 10 58 20 62C20 72 30 80 40 78C46 86 56 84 58 78Z"/><path class="br-o" transform="translate(120 0) scale(-1 1)" d="M58 14C50 8 36 10 30 18C20 18 12 28 16 38C8 44 10 58 20 62C20 72 30 80 40 78C46 86 56 84 58 78Z"/><g class="br-l"><line x1="44" y1="26" x2="32" y2="32"/><line x1="32" y1="32" x2="24" y2="46"/><line x1="32" y1="32" x2="40" y2="44"/><line x1="44" y1="26" x2="50" y2="38"/><line x1="40" y1="44" x2="50" y2="38"/><line x1="24" y1="46" x2="34" y2="60"/><line x1="40" y1="44" x2="34" y2="60"/><line x1="40" y1="44" x2="48" y2="58"/><line x1="34" y1="60" x2="44" y2="70"/><line x1="48" y1="58" x2="44" y2="70"/><line x1="50" y1="38" x2="54" y2="50"/><line x1="48" y1="58" x2="54" y2="50"/><line x1="40" y1="44" x2="54" y2="50"/><line x1="76" y1="26" x2="88" y2="32"/><line x1="88" y1="32" x2="96" y2="46"/><line x1="88" y1="32" x2="80" y2="44"/><line x1="76" y1="26" x2="70" y2="38"/><line x1="80" y1="44" x2="70" y2="38"/><line x1="96" y1="46" x2="86" y2="60"/><line x1="80" y1="44" x2="86" y2="60"/><line x1="80" y1="44" x2="72" y2="58"/><line x1="86" y1="60" x2="76" y2="70"/><line x1="72" y1="58" x2="76" y2="70"/><line x1="70" y1="38" x2="66" y2="50"/><line x1="72" y1="58" x2="66" y2="50"/><line x1="80" y1="44" x2="66" y2="50"/><line x1="54" y1="50" x2="66" y2="50"/><line x1="50" y1="38" x2="70" y2="38"/><line x1="48" y1="58" x2="72" y2="58"/></g><circle class="br-n" style="--i:0" cx="44" cy="26" r="2.6"/><circle class="br-n" style="--i:1" cx="32" cy="32" r="2.6"/><circle class="br-n" style="--i:2" cx="24" cy="46" r="2.6"/><circle class="br-n" style="--i:3" cx="40" cy="44" r="2.6"/><circle class="br-n" style="--i:4" cx="50" cy="38" r="2.6"/><circle class="br-n" style="--i:5" cx="34" cy="60" r="2.6"/><circle class="br-n" style="--i:6" cx="48" cy="58" r="2.6"/><circle class="br-n" style="--i:7" cx="44" cy="70" r="2.6"/><circle class="br-n" style="--i:8" cx="54" cy="50" r="2.6"/><circle class="br-n" style="--i:9" cx="76" cy="26" r="2.6"/><circle class="br-n" style="--i:10" cx="88" cy="32" r="2.6"/><circle class="br-n" style="--i:11" cx="96" cy="46" r="2.6"/><circle class="br-n" style="--i:12" cx="80" cy="44" r="2.6"/><circle class="br-n" style="--i:13" cx="70" cy="38" r="2.6"/><circle class="br-n" style="--i:14" cx="86" cy="60" r="2.6"/><circle class="br-n" style="--i:15" cx="72" cy="58" r="2.6"/><circle class="br-n" style="--i:16" cx="76" cy="70" r="2.6"/><circle class="br-n" style="--i:17" cx="66" cy="50" r="2.6"/></svg></span><div class="br-chat"><p class="u" style="--k:0">Cosa c'è da sapere oggi?</p><p style="--k:1">Ecco le tre cose da sapere oggi:</p><p style="--k:2">Il cliente Rossi ti deve ancora <b>700 €</b>. Preparo il sollecito?</p><p style="--k:3">Il listino di un tuo fornitore è salito del <b>30%</b> negli ultimi 30 giorni.</p><p style="--k:4">I fornitori ti stanno facendo prezzi <b>progressivamente migliori</b>. Buon momento per rinegoziare.</p></div></div></div>
       </div>
       <h4 class="flag-sub">Cosa cambia, in pratica</h4>
       <div class="flag-tiles">
@@ -145,23 +150,14 @@ body{--f-display:'Inter',ui-sans-serif,system-ui,sans-serif;--f-serif:'Instrumen
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/rough-notation/0.5.1/rough-notation.iife.js"></script>
 <script src="../assets/pilastro.js"></script>
 <script>
-/* Sottolineatura verde a mano (rough-notation, come «scalare senza caos» in home) sulle parole .rn: si disegna quando entrano in vista, animata solo la prima volta e senza «riduci animazioni». Ridisegnata al resize. */
+/* Sottolineatura verde sulle parole .rn: si «disegna» (clip-path) quando la parola entra in vista; il tracciato è CSS, quindi non si sposta mai. */
 (function(){
-  if(!window.RoughNotation||!('IntersectionObserver' in window)) return;
-  const mq=matchMedia('(prefers-reduced-motion: reduce)'), els=[...document.querySelectorAll('.rn')], an=new Map();
-  function disegna(el,anima){
-    if(an.has(el)) an.get(el).remove();
-    const a=RoughNotation.annotate(el,{type:'underline',color:'#0aa859',strokeWidth:4,padding:3,iterations:2,animate:anima&&!mq.matches,animationDuration:900});
-    an.set(el,a); a.show();
-  }
-  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting) return; io.unobserve(e.target);
-    setTimeout(()=>disegna(e.target,true),700);   /* dopo l'ingresso (.reveal dura .7s), così misura la posizione finale */
-  }),{threshold:.6});
-  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>els.forEach(el=>io.observe(el)));
-  let t; addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(()=>an.forEach((a,el)=>disegna(el,false)),150);});
+  const els=[].slice.call(document.querySelectorAll('.rn'));
+  if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('rn-on'));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>setTimeout(()=>e.target.classList.add('rn-on'),1100))}),{threshold:.6});
+  els.forEach(e=>io.observe(e));
 })();
 </script>
 <script>
@@ -184,5 +180,7 @@ body{--f-display:'Inter',ui-sans-serif,system-ui,sans-serif;--f-serif:'Instrumen
 })();
 </script>
 <script src="../assets/casestudy.js" defer></script>
+<script src="../assets/prenota.js" defer></script>
+<script src="../assets/chat.js" defer></script>
 </body>
 </html>
