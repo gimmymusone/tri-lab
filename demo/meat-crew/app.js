@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  var REVIEW_URL='https://g.page/r/CROQUjLiNfmkEBM/review';   // segnaposto: sostituire col link recensioni del locale
+  var REVIEW_URL='https://search.google.com/local/writereview?placeid=ChIJCwgpoUzFhkcR_dVN5MsMnpk';   // segnaposto: sostituire col link recensioni del locale
   var KEY='mc-crew-card',WELCOME=100,REVIEW_BONUS=50,GOALS=[1000,1800,3500,6000];
   var $=function(id){return document.getElementById(id)};
   var screens={home:$('s-home'),join:$('s-join'),card:$('s-card')};
