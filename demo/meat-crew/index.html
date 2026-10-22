@@ -4,16 +4,15 @@
 <title>Meat Crew — Com'è andata?</title>
 <meta name="description" content="Lascia una recensione e attiva la tua Crew Card: punti e vantaggi.">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#0d0d0d">
+<meta name="theme-color" content="#1d1d1b">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head><body><main class="wrap">
 
 <header class="brand">
-  <!-- Sostituire con <img src="brand/logo.svg" alt="Meat Crew"> quando c'è il logo -->
-  <div class="wm">Meat<i>.</i>Crew</div>
-  <p class="sub">Smash · Sauce · Sorriso</p>
+  <img src="brand/logo-esteso_su-bianco.svg" alt="Meat Crew" width="187" height="60">
+  <p class="sub">American burger culture</p>
 </header>
 
 <!-- 1 · Benvenuto -->
@@ -31,7 +30,7 @@
   <div class="stack" id="after-good" hidden>
     <a class="btn primary" id="g-review" href="https://g.page/r/CROQUjLiNfmkEBM/review" target="_blank" rel="noopener">
       <span style="display:flex;align-items:center;gap:10px"><svg class="g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#fff" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#fff" fill-opacity=".85" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#fff" fill-opacity=".7" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#fff" fill-opacity=".6" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>Pubblica su Google</span>
-      <small>+25 punti</small>
+      <small>+50 punti</small>
     </a>
   </div>
 
@@ -43,17 +42,17 @@
   </form>
 
   <div class="sep">Crew Card</div>
-  <div class="perk"><div class="ico">★</div><div><b>Punti a ogni ordine</b><span>1 punto ogni €1: accumuli e scegli il premio.</span></div></div>
+  <div class="perk"><div class="ico">★</div><div><b>Punti a ogni ordine</b><span>25 punti ogni €1 speso: accumuli e scegli il premio.</span></div></div>
   <div class="perk"><div class="ico">🔥</div><div><b>Vantaggi riservati</b><span>Sconti riservati a chi ha la card.</span></div></div>
   <div class="perk"><div class="ico">🎂</div><div><b>Sconti e sorprese</b><span>Omaggio di compleanno e promo riservate.</span></div></div>
-  <div class="stack"><button class="btn primary" id="go-join" type="button">Crea la tua Crew Card <small>50 punti subito</small></button></div>
+  <div class="stack"><button class="btn primary" id="go-join" type="button">Crea la tua Crew Card <small>100 punti subito</small></button></div>
 </section>
 
 <!-- 2 · Iscrizione -->
 <section id="s-join" hidden>
   <button class="back" type="button" data-go="home">← Indietro</button>
   <h2>Entra nella <i>Crew</i></h2>
-  <p class="lead">Ci mettiamo 20 secondi. Ti regaliamo 50 punti di benvenuto.</p>
+  <p class="lead">Ci mettiamo 20 secondi. Ti regaliamo 100 punti di benvenuto.</p>
   <form id="join" novalidate>
     <label>Nome<input id="f-name" type="text" autocomplete="given-name" required placeholder="Il tuo nome"></label>
     <label>Cognome<input id="f-surname" type="text" autocomplete="family-name" placeholder="Facoltativo"></label>
@@ -70,7 +69,7 @@
 <section id="s-card" hidden>
   <h2>Benvenuto nella <i>Crew</i></h2>
   <article class="pass" aria-label="La tua Crew Card">
-    <div class="pass-top"><div class="wm">Meat<i>.</i>Crew</div><span class="tier" id="c-tier">Crew Member</span></div>
+    <div class="pass-top"><img class="pass-logo" src="brand/logo-esteso_su-nero.svg" alt="Meat Crew" width="112" height="36"><span class="tier" id="c-tier">Crew Member</span></div>
     <div class="pts"><small>I tuoi punti</small><b id="c-pts">0</b>
       <div class="bar"><i id="c-bar"></i></div>
       <p class="next" id="c-next"></p></div>
@@ -85,11 +84,12 @@
   <h3 class="hl">Solo per chi ha la card</h3>
   <div class="perk"><div class="ico">%</div><div><b>Punti doppi il martedì</b><span>Ogni ordine vale il doppio.</span></div></div>
   <div class="perk"><div class="ico">🎂</div><div><b>Compleanno</b><span>Un burger in omaggio nella tua settimana.</span></div></div>
-  <div class="perk"><div class="ico">🍟</div><div><b>Premi a punti</b><span>150 pt = side · 300 pt = burger · 500 pt = menu completo.</span></div></div>
+  <div class="perk"><div class="ico">🍟</div><div><b>Premi a punti</b><span>1.000 pt = patatine · 1.800 pt = birra · 3.500 pt = burger.</span></div></div>
 
 </section>
 
-<footer>Meat Crew · Milano</footer>
+<div class="social"><a href="https://www.instagram.com/mochohf/" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/></svg></a><a href="https://www.tiktok.com/@meatcrew" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4v10.2a3.2 3.2 0 1 1-3.2-3.2M14 4c.3 2.3 1.8 3.8 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a><a href="https://www.meatcrew.it/it" aria-label="Sito web"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 12h16M12 4c2.500 2.300 2.500 13.700 0 16M12 4c-2.500 2.300-2.500 13.700 0 16" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></div>
+<footer>Meat Crew · Milano e Como</footer>
 </main>
 <div class="toast" id="toast" role="status"></div>
 <script src="qr.js"></script>

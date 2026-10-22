@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   var REVIEW_URL='https://g.page/r/CROQUjLiNfmkEBM/review';   // segnaposto: sostituire col link recensioni del locale
-  var KEY='mc-crew-card',WELCOME=50,REVIEW_BONUS=25,TARGET=150;
+  var KEY='mc-crew-card',WELCOME=100,REVIEW_BONUS=50,GOALS=[1000,1800,3500,6000];
   var $=function(id){return document.getElementById(id)};
   var screens={home:$('s-home'),join:$('s-join'),card:$('s-card')};
 
@@ -59,10 +59,10 @@
     $('c-name').textContent=(c.name+' '+(c.surname||'')).trim();
     $('c-num').textContent=c.num;
     $('c-pts').textContent=c.points;
-    var goal=c.points>=500?500:c.points>=300?500:c.points>=150?300:TARGET;
+    var goal=GOALS.filter(function(g){return g>c.points})[0]||GOALS[GOALS.length-1];
     var left=goal-c.points;
     $('c-next').textContent=left>0?'Ancora '+left+' punti per il prossimo premio':'Premio disponibile: chiedilo in cassa';
-    $('c-tier').textContent=c.points>=300?'Crew Gold':'Crew Member';
+    $('c-tier').textContent=c.points>=3500?'Crew Gold':'Crew Member';
     $('c-qr').innerHTML=qr(c.num);
     var bar=$('c-bar');bar.style.width='0';
     requestAnimationFrame(function(){requestAnimationFrame(function(){bar.style.width=Math.min(100,c.points/goal*100)+'%'})});
